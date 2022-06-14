@@ -39,8 +39,7 @@ const SubTitle = styled.div`
 `
 
 const Container = styled.div`
-    height: 100vh;
-    background-color:#333333 ;
+    background-color: #333333;
     @media (min-width: 767px){
         display: flex;
     }
