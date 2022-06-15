@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { CenterLoader, Title, SubTitle, TopBar, LowerBar, StyledInput, Container, Form, StyledButton, StyledLink, Components } from "./style";
+import { useNavigate, Link } from "react-router-dom"
 import Loading from "../../../assets/Loading"
 import api from "../../../services/api"
 import Swal from 'sweetalert2';
+import { Main, StyledButton, CenterLoader } from "../Sing-in/style";
 
 function SignUp() {
     const [button, setButton] = useState(true);
@@ -96,56 +96,56 @@ function SignUp() {
     }
     
     return (
-        <Container>
-            <TopBar>
-                <Components>
-                    <Title>linkr</Title>
-                    <SubTitle>save, share and discover<br />
-                        the best links on the web</SubTitle>
-                </Components>
-            </TopBar>
-            <LowerBar>
-                <Form onSubmit={handleSignUp}>
-                    <StyledInput
+        <Main>
+            <section className="logo">
+                <h1>linkr</h1>
+                <p>save, share and discover the best links on the web</p>
+            </section>
+            <section className="inputs">
+                <form onSubmit={handleSignUp}>
+                    <input
                         onChange={handleInputChange}
                         value={formData.email}
                         name="email"
                         placeholder="e-mail"
-                        type="email"
+                        type="email"   
                     />
-                    <StyledInput
+                    <input
                         onChange={handleInputChange}
                         value={formData.password}
                         name="password"
                         placeholder="password"
-                        type="password"
+                        type="password"     
                     />
-                    <StyledInput
+                    <input
                         onChange={handleInputChange}
                         value={formData.name}
                         name="name"
                         placeholder="username"
-                        type="text"
+                        type="text"    
                     />
-                    <StyledInput
+                    <input
                         onChange={handleInputChange}
                         value={formData.image}
                         name="image"
                         placeholder="picture url"
-                        type="url"
+                        type="url"    
                     />
                     {button ?
                         <StyledButton>Sign Up</StyledButton>
                         :
                         <StyledButton Loading={true}><CenterLoader><Loading height={35} width={43} /></CenterLoader></StyledButton>
                     }
-                    <StyledLink to="/">Switch back to log in</StyledLink>
-                </Form>
-            </LowerBar>
-        </Container>
-
+                    
+                </form>
+                <Link to="/">
+                    <p>Switch back to log in</p>
+                </Link>
+            </section>
+        </Main>
     )
 }
+
 export default SignUp
 
 
