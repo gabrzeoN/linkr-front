@@ -7,6 +7,7 @@ import UserContext from "../contexts/UserContext";
 
 import SignInPage from "./pages/Sing-in/SignInPage.jsx";
 import SignUp from "./pages/Sign-up";
+import Timeline from "./pages/Timeline/Timeline";
 
 export default function App(){
     const [userData, setUserData] = useState(null);
@@ -16,6 +17,7 @@ export default function App(){
                 <Routes>
                         <Route path="/" element={<SignInPage/>} />
                         <Route path="/sign-up" element={<SignUp/>} />
+                        <Route path="/timeline" element={<Timeline/>} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
