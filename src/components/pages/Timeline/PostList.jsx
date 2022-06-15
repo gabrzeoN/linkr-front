@@ -24,7 +24,7 @@ export default function PostList () {
 
     function getPosts () {
 
-        const promise = axios.get('https://localhost:5000/timeline'/* , config */);
+        const promise = axios.get('https://localhost:5000/timeline');
 
         promise.then (response => {
             setLoading(false);
@@ -32,7 +32,7 @@ export default function PostList () {
             setPosts(data);
         })
         promise.catch (e => {
-            alert ('Algo deu errado. Vamos tentar de novo.  ╭( ･ㅂ･)و');
+            alert ('An error occured while trying to fetch the posts, please refresh the page');
             navigate('/timeline'); 
         });
 
@@ -45,11 +45,11 @@ export default function PostList () {
     function showPosts () {
         if (posts.length > 0) {
             return posts.map(post => {
-                const { userImage, userName, description, url } = post;
+                const { userImage, userName, message, url } = post;
                 return (
 
                     <>
-                        <Post userImage={userImage} userName={userName} description={description} url={url} />
+                        <Post userImage={userImage} userName={userName} message={message} url={url} />
                     </>
 
                 );

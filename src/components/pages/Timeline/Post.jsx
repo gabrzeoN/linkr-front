@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function Post ({ userImage, userName, description, url }) {
+export default function Post ({ userImage, userName, message, url }) {
 
     return (
 
@@ -12,7 +12,7 @@ export default function Post ({ userImage, userName, description, url }) {
                 <UserName>{userName}</UserName>
             </PostAuth>
             <PostInfo>
-                <PostDescription>{description}</PostDescription>
+                <PostDescription>{message}</PostDescription>
                 <PostLink>{url}</PostLink>
             </PostInfo>
         </SinglePost>
