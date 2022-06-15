@@ -73,6 +73,13 @@ export const Inputs = styled.input`
     border-radius: 5px;
     border:none;
 
+    font-family: 'Lato';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 18px;
+        color: #949494;
+
     &::placeholder{
         font-family: 'Lato';
         font-style: normal;
@@ -98,6 +105,13 @@ export const Text = styled.textarea`
     border:none;
 
     padding: 8px 12px 8px 12px;
+
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    text-align: start;
+    color: #949494;   
 
     &::placeholder{
         font-family: 'Lato';
