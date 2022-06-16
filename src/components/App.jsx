@@ -8,6 +8,7 @@ import UserContext from "../contexts/UserContext";
 import SignInPage from "./pages/Sing-in/SignInPage.jsx";
 import SignUp from "./pages/Sign-up";
 import Timeline from "./pages/Timeline.jsx";
+import LikePage from "./Like/LikePage";// TODO erase me
 
 export default function App(){
     const [userData, setUserData] = useState(null);
@@ -18,6 +19,7 @@ export default function App(){
                         <Route path="/" element={<SignInPage/>} />
                         <Route path="/sign-up" element={<SignUp/>} />
                         <Route path="/timeline" element={<Timeline />} ></Route>
+                        <Route path="/likespage" element={<LikePage />} ></Route> // TODO erase me
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
