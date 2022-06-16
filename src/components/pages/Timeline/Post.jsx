@@ -1,15 +1,13 @@
 import styled from "styled-components";
 
-export default function Post ({ userImage, userName, message, url }) {
+export default function Post ({ name, image, url, message }) {
 
     return (
 
         <SinglePost >
             <PostAuth>
-                <UserPic>
-                    <img src={userImage} height={50} width={50} alt={'user-image'}/>
-                </UserPic>
-                <UserName>{userName}</UserName>
+                <UserPic src={image} height={50} width={50} alt={'user-image'} />
+                <UserName>{name}</UserName>
             </PostAuth>
             <PostInfo>
                 <PostDescription>{message}</PostDescription>
@@ -46,14 +44,13 @@ const PostAuth = styled.div`
 
 `;
 
-const UserPic = styled.div`
+const UserPic = styled.img`
 
     width: 50px;
     height: 50px;
 
     margin-left: 18px;
 
-    background: white;
     border-radius: 26.5px;
 
 `;
@@ -66,7 +63,8 @@ const UserName = styled.div`
     margin-top: 5px;
     margin-left: 18px;
 
-    background: green;
+    color: white;
+
 
 `;
 
@@ -85,7 +83,7 @@ const PostDescription = styled.div`
     margin-top: -15px;
     margin-left: 86px;
 
-    background: yellow;
+    color: white;
 
 `;
 
@@ -96,7 +94,9 @@ const PostLink = styled.div`
 
     margin-left: 86px;
 
-    background: red;
+    background: grey;
     border-radius: 11px;
+
+    color: white;
 
 `;

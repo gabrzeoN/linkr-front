@@ -1,26 +1,20 @@
 import styled from "styled-components";
-/* import Header from "./Header"; */
 import PostList from "./PostList";
 
-/* const urlMetadata = null; */ 
-
 export default function Timeline () {
-
     return (
 
             <TimelineBody>
-                {/* <Header /> */}
                 <PostList />
             </TimelineBody>
 
     );
-
 }
 
 const TimelineBody = styled.div`
 
-    width: 100vw;
-    height: 100hw;
+    width: 100%;
+    height: 100%;
 
     display: flex;
     flex-direction: column;

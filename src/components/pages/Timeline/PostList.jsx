@@ -24,16 +24,17 @@ export default function PostList () {
 
     function getPosts () {
 
-        const promise = axios.get('https://localhost:5000/timeline');
+        const promise = axios.get('http://localhost:5000/timeline');
 
         promise.then (response => {
             setLoading(false);
             const { data } = response;
+            console.log(data);
             setPosts(data);
         })
         promise.catch (e => {
             alert ('An error occured while trying to fetch the posts, please refresh the page');
-            navigate('/timeline'); 
+            /* navigate('/timeline');  */
         });
 
     }
@@ -43,13 +44,14 @@ export default function PostList () {
     }, []);
 
     function showPosts () {
+        
         if (posts.length > 0) {
             return posts.map(post => {
-                const { userImage, userName, message, url } = post;
+                const { name, image, url, message } = post;
                 return (
 
                     <>
-                        <Post userImage={userImage} userName={userName} message={message} url={url} />
+                        <Post name={name} image={image} url={url} message={message} />
                     </>
 
                 );
@@ -67,9 +69,7 @@ export default function PostList () {
 
         <TimelinePosts>
             <Header />
-            {loading ? <List Loading={true}><CenterLoader><Loading height={35} width={43} /></CenterLoader></List>
-             : 
-             <List>{showPosts}</List>}
+            {loading ? <List Loading={true}><CenterLoader><Loading height={35} width={43} /></CenterLoader></List> : <List>{showPosts()}</List>}
         </TimelinePosts>
 
     );
@@ -78,8 +78,10 @@ export default function PostList () {
 
 const NoPosts = styled.div`
 
+    margin-top: 40px;
+    margin-bottom: 40px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 18px;
 
 `;
 
@@ -94,6 +96,7 @@ const List = styled.div`
 
     display: flex;
     flex-direction: column;
+    align-items: center;
 
 `;
 
