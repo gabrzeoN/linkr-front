@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 
 export default function PublishCard(){
     const {userData} = useContext(UserContext);
-    console.log(userData.token);
     const [post, setPost] = useState({url: "", message:""});
     const [disabled, setDisabled] = useState(false);
 
@@ -24,10 +23,11 @@ export default function PublishCard(){
             setPost({url:"", message:""});
         });
         promise.catch((error) => {
+            console.log(error.response.data)
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: error.response.data
+                text: "Houve um erro ao publicar seu link!"
             })
             setDisabled(false);
         });
