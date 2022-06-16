@@ -1,40 +1,42 @@
 import { Container, Picture, Div, Title, Form, Inputs, Text, Buttons } from "./style";
-import imagePerfil from "./../../../assets/img/image 4.png";
-import { useState } from "react";
+import UserContext from "../../../contexts/UserContext";
+import { useState, useContext } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function PublishCard(){
+    const {userData} = useContext(UserContext);
+    console.log(userData.token);
     const [post, setPost] = useState({url: "", message:""});
     const [disabled, setDisabled] = useState(false);
 
-    // const token = ""; //TODO:pegar token do localStorage
-    // const config = {headers: {Authorization: `Bearer ${token}`}};
+    const config = {headers: {Authorization: `Bearer ${userData.token}`}};
 
     function submitPublish(e){
         e.preventDefault();
         setDisabled(true);
         console.log("post", post);
-        setDisabled(false);
-        setPost({url:"", message:""});
 
-        //TODO:fazer o deploy do banco e definir o objeto que será enviado
-        // const URL = "http://localhost:5000/posts";
-        // const promise = axios.post(URL, post, config);
-        // promise.then(() => {
-        //     console.log("post enviado", post);
-        //     setDisabled(false);
-        //     setPost({url:"", message:""});
-        //     console.log("campo vazio", post);
-        // });
-        // promise.catch((erro) => {
-        //     console.log("erro", erro);
-        //     setDisabled(false);
-        // });
+        const URL = "http://localhost:5000/posts";
+        const promise = axios.post(URL, post, config);
+        promise.then(() => {
+            setDisabled(false);
+            setPost({url:"", message:""});
+        });
+        promise.catch((error) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: error.response.data
+            })
+            setDisabled(false);
+        });
 
     }
 
     return (
         <Container>
-            <Picture src={imagePerfil} alt="foto de perfil" />
+            <Picture src={userData.image} alt="foto de perfil" />
             <Div>
                 <Title>What are you going to share today?</Title>
                 <Form onSubmit={submitPublish}>
@@ -50,7 +52,9 @@ export default function PublishCard(){
                         onChange={(e) => setPost({...post, message:e.target.value})}
                         disabled={disabled}/>
 
-                    <Buttons type="submit" disabled={disabled}> {!disabled ? "Publish" : "Publishing..."}</Buttons>
+                    <Buttons type="submit" disabled={disabled}> 
+                        {!disabled ? "Publish" : "Publishing..."}
+                    </Buttons>
                 </Form>
             </Div>
         </Container>
