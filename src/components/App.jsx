@@ -17,7 +17,7 @@ export default function App(){
                 <Routes>
                         <Route path="/" element={<SignInPage/>} />
                         <Route path="/sign-up" element={<SignUp/>} />
-                        <Route path="/timeline" element={<Timeline />} ></Route>
+                        <Route path="/timeline" element={<Timeline/>} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>

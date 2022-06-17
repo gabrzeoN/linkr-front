@@ -14,3 +14,7 @@ a{
 a:visited{
     text-decoration: none;
 }
+
+body{
+    background-color: #333333;
+}
