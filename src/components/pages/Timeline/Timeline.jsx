@@ -20,6 +20,4 @@ const TimelineBody = styled.div`
     flex-direction: column;
     align-items: center;
 
-    background-color: #E5E5E5;
-
 `;

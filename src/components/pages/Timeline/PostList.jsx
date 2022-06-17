@@ -4,15 +4,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import Header from "./Header";
-import Loading from "../../../assets/Loading";
 
 export default function PostList () {
 
     const [posts, setPosts] = useState ([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     /* const { token } = localStorage; */
 
-    const navigate = useNavigate();
+    /* const navigate = useNavigate(); */
 
     /* const config = {
         headers: {
@@ -29,7 +28,6 @@ export default function PostList () {
         promise.then (response => {
             setLoading(false);
             const { data } = response;
-            console.log(data);
             setPosts(data);
         })
         promise.catch (e => {
@@ -47,11 +45,11 @@ export default function PostList () {
         
         if (posts.length > 0) {
             return posts.map(post => {
-                const { name, image, url, message } = post;
+                const { userId, name, image,id , url, metadata, message } = post;
                 return (
 
                     <>
-                        <Post name={name} image={image} url={url} message={message} />
+                        <Post userId={userId} name={name} image={image} id={id} url={url} metadata={metadata} message={message} />
                     </>
 
                 );
@@ -69,7 +67,7 @@ export default function PostList () {
 
         <TimelinePosts>
             <Header />
-            {loading ? <List Loading={true}><CenterLoader><Loading height={35} width={43} /></CenterLoader></List> : <List>{showPosts()}</List>}
+            {loading ? <Loading>Loading...</Loading> : <List>{showPosts()}</List>}
         </TimelinePosts>
 
     );
@@ -80,8 +78,10 @@ const NoPosts = styled.div`
 
     margin-top: 40px;
     margin-bottom: 40px;
+
     font-weight: bold;
     font-size: 18px;
+    color: white;
 
 `;
 
@@ -100,10 +100,16 @@ const List = styled.div`
 
 `;
 
-const CenterLoader = styled.div`
+const Loading = styled.div`
 
-    display:flex;
-    align-items: center;
-    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 40px;
+    margin-bottom: 40px;
+    
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
 
 `;
