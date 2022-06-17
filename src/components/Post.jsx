@@ -1,26 +1,66 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
 import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
 
 export default function Post ({ name, image, url, message, metadata, userId, id }) {
     const {userData} = useContext(UserContext);
-    console.log(userData.id);
+    const [editPost, setEditPost] = useState(false);
+
+    const [inputValue, setInputValue] = useState(message);
+    const previousInputValue = useRef(null);
+
+    useEffect(() => {
+        previousInputValue.current = inputValue;
+    }, [inputValue]);
+
+    function updateMessage(e){
+        if(e.keyCode ===  13){
+            e.preventDefault();
+            updatePost(inputValue);
+            //console.log("com enter",inputValue);
+        } else if(e.keyCode === 27){
+            e.preventDefault();
+            setInputValue(message);
+            setEditPost(false);
+        }        
+    }
+
+    function updatePost(inputValue){
+        const newPost = {
+            postId: id,
+            userId: userId,
+            newMessage:inputValue
+        }
+        console.log("new post", newPost);
+
+    }
+
+
         
     return (
 
-        <SinglePost >
+        <SinglePost>
             <PostAuth>
                 <UserPic src={image} height={50} width={50} alt={'user-image'} />
                 <UserName>{name}</UserName>
                 {userId === userData.id ? 
                 <DivIcon>
-                    <FaPencilAlt color="#ffffff" size={16} />
+                    <FaPencilAlt onClick={() => setEditPost(true)} color="#ffffff" size={16} />
                     <FaTrashAlt color="#ffffff" size={16}/>
                 </DivIcon> : <></>}
             </PostAuth>
             <PostInfo>
-                <PostMessage>{message}</PostMessage>
+                {editPost ? 
+                    <EditMessage ref={previousInputValue}
+                            type="text" 
+                            value={inputValue} 
+                            onChange={e => setInputValue(e.target.value)}
+                            onKeyDown={(e) => updateMessage(e)}
+                            />
+                
+                :
+                <PostMessage>{message}</PostMessage>}
                 <PostLikes></PostLikes>
                 <PostMetadata target="_blank" rel="noreferrer" href={url}>
                     <MetaTitle>{metadata.title}</MetaTitle>
@@ -30,7 +70,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                 </PostMetadata>
             </PostInfo>
         </SinglePost>
-
+        
     );
 }
 
@@ -97,11 +137,21 @@ const PostInfo = styled.div`
 
     display: flex;
     flex-direction: column;
+    gap:5px;
+`;
 
+const EditMessage = styled.input`
+    width: 503px;
+    height: 44px;
+
+    border-radius:7px;
+    border:none;
+    background-color:#ffffff;
+    margin-top: -15px;
+    margin-left: 86px;
 `;
 
 const PostMessage = styled.div`
-
     width: 502px;
     height: 45px;
 

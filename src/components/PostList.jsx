@@ -49,7 +49,7 @@ export default function PostList () {
                 return (
 
                     <>
-                        <Post key={id} userId={userId} name={name} image={image} id={id} url={url} metadata={metadata} message={message} />
+                        <Post userId={userId} name={name} image={image} id={id} url={url} metadata={metadata} message={message} />
                     </>
 
                 );
