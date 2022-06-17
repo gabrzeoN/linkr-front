@@ -18,8 +18,8 @@ export default function SignInPage(){
         setDisabled(true);
         try{
             const {data} = await axios.post(postLoginURL, loginData);
-            const {name, picture, token} = data;
-            setUserData({name, picture, token});
+            const {name, image, token} = data;
+            setUserData({name, image, token});
             navigate("/timeline");
         }catch(error){
             Swal.fire({
