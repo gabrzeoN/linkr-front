@@ -5,7 +5,14 @@ export const LikedContent = styled.button`
     border: 0px;
     ion-icon{
         color: #AC0000;
-        font-size: 64px;
+        font-size: 32px;
+    }
+    p{
+        font-family: 'Lato';
+        font-size: 11px;
+        line-height: 13px;
+        text-align: center;
+        color: #FFFFFF;
     }
 `;
 
@@ -14,6 +21,13 @@ export const NotLikedContent = styled.button`
     border: 0px;
     ion-icon{
         color: white;
-        font-size: 64px;
+        font-size: 32px;
+    }
+    p{
+        font-family: 'Lato';
+        font-size: 11px;
+        line-height: 13px;
+        text-align: center;
+        color: #FFFFFF;
     }
 `;

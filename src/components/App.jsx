@@ -7,7 +7,7 @@ import UserContext from "../contexts/UserContext";
 
 import SignInPage from "./pages/Sing-in/SignInPage.jsx";
 import SignUp from "./pages/Sign-up";
-import Timeline from "./pages/Timeline.jsx";
+import Timeline from "./pages/Timeline/Timeline.jsx";
 import LikePage from "./Like/LikePage";// TODO erase me
 
 export default function App(){
@@ -18,8 +18,8 @@ export default function App(){
                 <Routes>
                         <Route path="/" element={<SignInPage/>} />
                         <Route path="/sign-up" element={<SignUp/>} />
-                        <Route path="/timeline" element={<Timeline />} ></Route>
-                        <Route path="/likespage" element={<LikePage />} ></Route> // TODO erase me
+                        <Route path="/timeline" element={<Timeline/>} />
+                        <Route path="/likespage" element={<LikePage />} /> // TODO: erase me
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
