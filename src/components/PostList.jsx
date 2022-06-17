@@ -1,6 +1,6 @@
 import Post from "./Post";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import Header from "./Header";
@@ -49,7 +49,7 @@ export default function PostList () {
                 return (
 
                     <>
-                        <Post userId={userId} name={name} image={image} id={id} url={url} metadata={metadata} message={message} />
+                        <Post key={id} userId={userId} name={name} image={image} id={id} url={url} metadata={metadata} message={message} />
                     </>
 
                 );

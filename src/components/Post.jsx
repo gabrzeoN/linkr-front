@@ -1,12 +1,23 @@
+import { useContext } from "react";
+import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
 import styled from "styled-components";
+import UserContext from "../contexts/UserContext";
 
-export default function Post ({ name, image, url, message, metadata }) {
+export default function Post ({ name, image, url, message, metadata, userId, id }) {
+    const {userData} = useContext(UserContext);
+    console.log(userData.id);
+        
     return (
 
         <SinglePost >
             <PostAuth>
                 <UserPic src={image} height={50} width={50} alt={'user-image'} />
                 <UserName>{name}</UserName>
+                {userId === userData.id ? 
+                <DivIcon>
+                    <FaPencilAlt color="#ffffff" size={16} />
+                    <FaTrashAlt color="#ffffff" size={16}/>
+                </DivIcon> : <></>}
             </PostAuth>
             <PostInfo>
                 <PostMessage>{message}</PostMessage>
@@ -24,7 +35,6 @@ export default function Post ({ name, image, url, message, metadata }) {
 }
 
 const SinglePost = styled.div`
-
     height: 276px;
     width: 611px;
 
@@ -33,19 +43,31 @@ const SinglePost = styled.div`
     display: flex;
     flex-direction: column;
 
-    background: #171717;
+    background-color: #171717;
     border-radius: 16px;
+
+    position: relative;
 
 `;
 
 const PostAuth = styled.div`
-
     height: 55px;
 
     margin-top: 16px;
 
     display: flex;
+`;
 
+const DivIcon = styled.div`
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    position: absolute;
+    top:22px;
+    right: 21px;
 `;
 
 const UserPic = styled.img`
