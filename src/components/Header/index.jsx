@@ -8,14 +8,14 @@ import { HeaderContent, Options, OptionsBar, Logout, HideOptions } from "./style
 
 export default function Header(){
     const patchLogoutURL = `http://localhost:5000/sign-out`;
-    const {image, token} = useContext(UserContext);
+    const {userData} = useContext(UserContext); 
     const [arrow, setArrow] = useState("down")
     const [optionsBar, setOptionsBar] = useState(false);
     const navigate = useNavigate();
 
     const config = {
         headers: {
-            authorization: `Bearer ${token}`
+            authorization: `Bearer ${userData.token}`
         }
     }
 
@@ -45,7 +45,7 @@ export default function Header(){
             <h1>linkr</h1>
             <Options onClick={() => openCloseOptionsBar()}>
                 <ion-icon name={`chevron-${arrow}-outline`}></ion-icon>
-                <img src={image}></img>
+                <img src={userData.image} alt={userData.name}></img>
             </Options>
             <OptionsBar optionsBar={optionsBar}>
                 <Logout onClick={() => logout()}>Logout</Logout>
