@@ -1,23 +1,13 @@
-import styled from "styled-components";
-import PostList from "./PostList";
+import Header from "../../Header/index.jsx";
+import PublishCard from "./../PublishCard/PublishCard.jsx";
+import PostList from "./../../PostList.jsx";
 
-export default function Timeline () {
+export default function Timeline(){
     return (
-
-            <TimelineBody>
-                <PostList />
-            </TimelineBody>
-
+        <>
+            <Header />
+            <PublishCard/>
+            <PostList />
+        </>
     );
 }
-
-const TimelineBody = styled.div`
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-`;

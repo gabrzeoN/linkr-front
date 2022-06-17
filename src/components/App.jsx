@@ -7,7 +7,7 @@ import UserContext from "../contexts/UserContext";
 
 import SignInPage from "./pages/Sing-in/SignInPage.jsx";
 import SignUp from "./pages/Sign-up";
-import Timeline from "./pages/Timeline.jsx";
+import Timeline from "./pages/Timeline/Timeline.jsx";
 
 export default function App(){
     const [userData, setUserData] = useState(null);

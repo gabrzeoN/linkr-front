@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import "../../../assets/css/style.css"; 
 
 export default function Post ({ name, image, url, message, metadata }) {
     return (
