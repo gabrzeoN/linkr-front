@@ -2,7 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
+import SearchBar from "../SearchBar";
 import UserContext from "../../contexts/UserContext";
 import { HeaderContent, Options, OptionsBar, Logout, HideOptions } from "./style";
 
@@ -43,6 +43,7 @@ export default function Header(){
     return(
         <HeaderContent>
             <h1>linkr</h1>
+            <SearchBar />
             <Options onClick={() => openCloseOptionsBar()}>
                 <ion-icon name={`chevron-${arrow}-outline`}></ion-icon>
                 <img src={image}></img>

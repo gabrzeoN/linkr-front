@@ -9,17 +9,6 @@ export default function PostList () {
 
     const [posts, setPosts] = useState ([]);
     const [loading, setLoading] = useState(true);
-    /* const { token } = localStorage; */
-
-    /* const navigate = useNavigate(); */
-
-    /* const config = {
-        headers: {
-
-            Authorization: `Bearer ${token}` 
-        
-        }
-    }; */
 
     function getPosts () {
 
@@ -31,8 +20,7 @@ export default function PostList () {
             setPosts(data);
         })
         promise.catch (e => {
-            alert ('An error occured while trying to fetch the posts, please refresh the page');
-            /* navigate('/timeline');  */
+            alert ('An error occured while trying to fetch the posts, please refresh the page', e);
         });
 
     }
@@ -45,7 +33,7 @@ export default function PostList () {
         
         if (posts.length > 0) {
             return posts.map(post => {
-                const { userId, name, image,id , url, metadata, message } = post;
+                const { userId, name, image, id , url, metadata, message } = post;
                 return (
 
                     <>
