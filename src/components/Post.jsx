@@ -1,9 +1,10 @@
-import axios from "axios";
 import { useContext, useState, useEffect, useRef } from "react";
 import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
+import UserContext from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import UserContext from "../contexts/UserContext";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 export default function Post ({ name, image, url, message, metadata, userId, id }) {
     const {userData} = useContext(UserContext); 
@@ -23,8 +24,6 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
             e.preventDefault();
             setDisabled(true);
             updatePost(inputValue);
-            
-            //console.log("com enter",inputValue);
         } else if(e.keyCode === 27){
             e.preventDefault();
             setInputValue(message);
@@ -34,20 +33,22 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
 
     function updatePost(inputValue){
         const newPost = { postId: id, userId: userId, newMessage:inputValue }
-        console.log("new post", newPost);
-
         const URL = "http://localhost:5000/posts";
         const config = {headers: {Authorization: `Bearer ${localStorage.getItem('token')}` }};
         const promise = axios.put(URL, newPost, config);
-        promise.then((response) => {
-            console.log(response);
+        promise.then((res) => {
             setInputValue(newPost.newMessage);
             setEditPost(false);
-            navigate("/timeline");
-            console.log("renderizou");
-            
+            navigate("/timeline");            
             });
-        promise.catch((error) => console.log("erro", error));
+        promise.catch((err) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Não foi possível salvar as alterações!"
+            })
+            setDisabled(false);
+        });
     }
 
     return (
@@ -70,8 +71,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                             onChange={e => setInputValue(e.target.value)}
                             onKeyDown={(e) => updateMessage(e)}
                             disabled={disabled}
-                            />
-                
+                    />
                 :
                 <PostMessage>{message}</PostMessage>}
                 <PostLikes></PostLikes>

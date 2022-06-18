@@ -17,7 +17,6 @@ export default function PublishCard(){
     function submitPublish(e){
         e.preventDefault();
         setDisabled(true);
-        console.log("post", post);
 
         const URL = "http://localhost:5000/posts";
         const promise = axios.post(URL, post, config);
@@ -27,7 +26,6 @@ export default function PublishCard(){
             navigate("/timeline");
         });
         promise.catch((error) => {
-            console.log(error.response.data)
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',

@@ -1,7 +1,6 @@
 import Header from "../../Header/index.jsx";
 import PublishCard from "./../PublishCard/PublishCard.jsx";
 import PostList from "./../../PostList.jsx";
-import { useState } from "react";
 
 export default function Timeline(){
     return (
