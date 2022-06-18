@@ -53,19 +53,21 @@ export default function Like({postId}){
         let text = "";
         if(likedByMe){
             if(allLikesName.length >= 3){
-                text = `You, ${allLikesName[0]}, and ${likesAmount - 2} others`;
+                text = `You, ${allLikesName[0]} and ${likesAmount - 2} others`;
             }else if(allLikesName.length === 2){
-                text = `You, ${allLikesName[0]}, and 1 other`;
+                text = `You, ${allLikesName[0]} and 1 other`;
             }else if(allLikesName.length === 1){
-                text = `You, and ${allLikesName[0]}`;
+                text = `You and ${allLikesName[0]}`;
             }else if(allLikesName.length === 0){
                 text = `You`;
             } 
         }else{
-            if(allLikesName.length >= 3){
-                text = `${allLikesName[0]}, and ${likesAmount - 1} others`;
+            if(allLikesName.length >= 4){
+                text = `${allLikesName[0]}, ${allLikesName[1]} and ${likesAmount - 2} others`;
+            }else if(allLikesName.length === 3){
+                text = `${allLikesName[0]}, ${allLikesName[1]} and 1 other`;
             }else if(allLikesName.length === 2){
-                text = `${allLikesName[0]}, and ${allLikesName[1]}`;
+                text = `${allLikesName[0]} and ${allLikesName[1]}`;
             }else if(allLikesName.length === 1){
                 text = `${allLikesName[0]}`;
             }else if(allLikesName.length === 0){

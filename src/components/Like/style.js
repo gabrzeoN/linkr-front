@@ -7,6 +7,7 @@ export const LikedContent = styled.button`
     ion-icon{
         color: #AC0000;
         font-size: 32px;
+        pointer-events: none;
     }
     p{
         font-family: 'Lato';
@@ -24,6 +25,7 @@ export const NotLikedContent = styled.button`
     ion-icon{
         color: white;
         font-size: 32px;
+        pointer-events: none;
     }
     p{
         font-family: 'Lato';
