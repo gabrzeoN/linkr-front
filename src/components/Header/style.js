@@ -24,6 +24,7 @@ export const HeaderContent = styled.header`
 `;
 
 export const Options = styled.div`
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,7 +32,9 @@ export const Options = styled.div`
     ion-icon{
         font-size: 40px;
         margin-right: 10px;
+        pointer-events: none;
     }
+
     img{
         width: 53px;
         height: 53px;
@@ -40,6 +43,7 @@ export const Options = styled.div`
 `;
 
 export const OptionsBar = styled.div`
+    cursor: pointer;
     z-index: 5;
     position: fixed;
     display: flex;

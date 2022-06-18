@@ -3,6 +3,7 @@ import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Like from "./Like";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -50,7 +51,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
             setDisabled(false);
         });
     }
-
+  
     return (
 
         <SinglePost>
@@ -74,7 +75,9 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                     />
                 :
                 <PostMessage>{message}</PostMessage>}
-                <PostLikes></PostLikes>
+                <PostLikes>
+                    <Like postId={id} userId={userId}></Like>
+                </PostLikes>
                 <PostMetadata target="_blank" rel="noreferrer" href={url}>
                     <MetaTitle>{metadata.title}</MetaTitle>
                     <MetaDescription>{metadata.description}</MetaDescription>
@@ -176,17 +179,14 @@ const PostMessage = styled.div`
 `;
 
 const PostLikes = styled.div`
-
     position: absolute;    
-
-    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
     height: 55px;
-
-    margin-top: 15px;
-    margin-left: 25px;
-
-    background-color: white;
-
+    margin-top: 20px;
+    margin-left: 15px;
 `;
 
 const PostMetadata = styled.a`
