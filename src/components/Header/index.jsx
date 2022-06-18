@@ -8,7 +8,8 @@ import { HeaderContent, Options, OptionsBar, Logout, HideOptions } from "./style
 
 export default function Header(){
     const patchLogoutURL = `http://localhost:5000/sign-out`;
-    const {image, token} = useContext(UserContext);
+    const {userData} = useContext(UserContext);
+    const {image, token} = userData;
     const [arrow, setArrow] = useState("down")
     const [optionsBar, setOptionsBar] = useState(false);
     const navigate = useNavigate();

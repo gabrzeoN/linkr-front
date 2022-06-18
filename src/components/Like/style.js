@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const LikedContent = styled.button`
+    cursor: pointer;
     background-color: rgba(0, 0, 0, 0);
     border: 0px;
     ion-icon{
@@ -17,6 +18,7 @@ export const LikedContent = styled.button`
 `;
 
 export const NotLikedContent = styled.button`
+    cursor: pointer;
     background-color: rgba(0, 0, 0, 0);
     border: 0px;
     ion-icon{
