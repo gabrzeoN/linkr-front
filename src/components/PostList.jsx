@@ -1,36 +1,29 @@
-import Post from "./Post";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import styled from "styled-components";
+import axios from "axios";
 import Header from "./Header";
+import Post from "./Post";
 
 export default function PostList () {
-
     const [posts, setPosts] = useState ([]);
     const [loading, setLoading] = useState(true);
-    /* const { token } = localStorage; */
+    const token = localStorage.getItem('token');
 
-    /* const navigate = useNavigate(); */
-
-    /* const config = {
+    const config = {
         headers: {
-
             Authorization: `Bearer ${token}` 
-        
         }
-    }; */
+    }; 
 
-    function getPosts () {
-
-        const promise = axios.get('http://localhost:5000/timeline');
+    function getPosts() {
+        const promise = axios.get('http://localhost:5000/timeline', config);
 
         promise.then (response => {
             setLoading(false);
             const { data } = response;
             setPosts(data);
         })
-        promise.catch (e => {
+        promise.catch (() => {
             alert ('An error occured while trying to fetch the posts, please refresh the page');
             /* navigate('/timeline');  */
         });
@@ -39,17 +32,19 @@ export default function PostList () {
 
     useEffect(() => {
         getPosts();
-    }, []);
+    }, [token]);
 
     function showPosts () {
         
         if (posts.length > 0) {
-            return posts.map(post => {
+            return posts.map((post, i)=> {
                 const { userId, name, image,id , url, metadata, message } = post;
                 return (
 
                     <>
-                        <Post userId={userId} name={name} image={image} id={id} url={url} metadata={metadata} message={message} />
+                        <Post  key={i} userId={userId} name={name} image={image} id={id} url={url} 
+                                metadata={metadata} message={message} 
+                        />
                     </>
 
                 );
