@@ -15,7 +15,7 @@ export default function Header(){
 
     const config = {
         headers: {
-            authorization: `Bearer ${userData.token}`
+            authorization: `Bearer ${localStorage.getItem('token')}`
         }
     }
 
@@ -28,7 +28,7 @@ export default function Header(){
         setArrow("down");
         setOptionsBar(false);
         try{
-            const {data} = await axios.patch(patchLogoutURL, {}, config);
+            await axios.patch(patchLogoutURL, {}, config);
             navigate("/");
         }catch(error){
             Swal.fire({

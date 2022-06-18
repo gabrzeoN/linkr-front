@@ -1,11 +1,15 @@
+import axios from "axios";
 import { useContext, useState, useEffect, useRef } from "react";
 import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
 
 export default function Post ({ name, image, url, message, metadata, userId, id }) {
-    const {userData} = useContext(UserContext);
+    const {userData} = useContext(UserContext); 
     const [editPost, setEditPost] = useState(false);
+    const [disabled, setDisabled] = useState(false);
+    const navigate = useNavigate();
 
     const [inputValue, setInputValue] = useState(message);
     const previousInputValue = useRef(null);
@@ -17,7 +21,9 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
     function updateMessage(e){
         if(e.keyCode ===  13){
             e.preventDefault();
+            setDisabled(true);
             updatePost(inputValue);
+            
             //console.log("com enter",inputValue);
         } else if(e.keyCode === 27){
             e.preventDefault();
@@ -27,17 +33,23 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
     }
 
     function updatePost(inputValue){
-        const newPost = {
-            postId: id,
-            userId: userId,
-            newMessage:inputValue
-        }
+        const newPost = { postId: id, userId: userId, newMessage:inputValue }
         console.log("new post", newPost);
 
+        const URL = "http://localhost:5000/posts";
+        const config = {headers: {Authorization: `Bearer ${localStorage.getItem('token')}` }};
+        const promise = axios.put(URL, newPost, config);
+        promise.then((response) => {
+            console.log(response);
+            setInputValue(newPost.newMessage);
+            setEditPost(false);
+            navigate("/timeline");
+            console.log("renderizou");
+            
+            });
+        promise.catch((error) => console.log("erro", error));
     }
 
-
-        
     return (
 
         <SinglePost>
@@ -46,17 +58,18 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                 <UserName>{name}</UserName>
                 {userId === userData.id ? 
                 <DivIcon>
-                    <FaPencilAlt onClick={() => setEditPost(true)} color="#ffffff" size={16} />
+                    <FaPencilAlt onClick={() => setEditPost(!editPost)} color="#ffffff" size={16} />
                     <FaTrashAlt color="#ffffff" size={16}/>
                 </DivIcon> : <></>}
             </PostAuth>
             <PostInfo>
                 {editPost ? 
-                    <EditMessage ref={previousInputValue}
+                    <EditMessage autoFocus ref={previousInputValue}
                             type="text" 
                             value={inputValue} 
                             onChange={e => setInputValue(e.target.value)}
                             onKeyDown={(e) => updateMessage(e)}
+                            disabled={disabled}
                             />
                 
                 :

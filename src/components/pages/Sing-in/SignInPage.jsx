@@ -20,6 +20,7 @@ export default function SignInPage(){
             const {data} = await axios.post(postLoginURL, loginData);
             const {id, name, image, token} = data;
             setUserData({id, name, image, token});
+            localStorage.setItem('token', token);
             navigate("/timeline");
         }catch(error){
             Swal.fire({
