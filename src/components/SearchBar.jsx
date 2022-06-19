@@ -34,11 +34,11 @@ export default function SearchBar () {
     function showProfiles () {
         if (searchProfiles.length > 0) {
             return searchProfiles.map(profiles => {
-                const { userId, name, image } = profiles;
+                const { id, name, image } = profiles;
                 return (
 
                     <>
-                        <Profile userId={userId} name={name} image={image} />
+                        <Profile id={id} name={name} image={image} />
                     </>
 
                 );
@@ -73,8 +73,7 @@ const SearchingContainer = styled.div`
 
     display: flex;
     display-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
 
 `;
 
@@ -132,12 +131,10 @@ const SearchingResults = styled.div`
 
     height: fit-content;
 
-    margin-top: 99px;
+    margin-top: 46px;
     
     display: flex;
-    display-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
 
     background-color: #E7E7E7;
     border-radius: 8px;

@@ -1,9 +1,13 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-export default function Profile ({ name, image }) {
+export default function Profile ({ id, name, image }) {
+    
+    const navigate = useNavigate();
+
     return (
 
-        <SingleProfile>
+        <SingleProfile onClick={()=> navigate(`/users/${id}`)}>
             <ProfilePic src={image} width={39} height={39} alt={"user-pic"} />
             <ProfileName>{name}</ProfileName>
         </SingleProfile>
