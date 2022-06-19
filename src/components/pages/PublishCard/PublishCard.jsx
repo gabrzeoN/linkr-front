@@ -3,14 +3,12 @@ import UserContext from "../../../contexts/UserContext";
 import { useState, useContext } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
-export default function PublishCard(){
+export default function PublishCard({getPosts}){
     const token = localStorage.getItem('token');
     const {userData} = useContext(UserContext);
     const [post, setPost] = useState({url: "", message:""});
     const [disabled, setDisabled] = useState(false);
-    const navigate = useNavigate();
 
     const config = {headers: {Authorization: `Bearer ${token}`}};
 
@@ -23,7 +21,7 @@ export default function PublishCard(){
         promise.then(() => {
             setDisabled(false);
             setPost({url:"", message:""});
-            navigate("/timeline");
+            getPosts();
         });
         promise.catch((error) => {
             Swal.fire({

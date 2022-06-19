@@ -39,7 +39,7 @@ export default function Timeline(){
             <TimelineBody>
                 <Header />
                 <TimelineName />
-                <PublishCard />
+                <PublishCard getPosts={getPosts}/>
                 <PostList posts={posts} getPosts={getPosts} loading={loading}/>
             </TimelineBody>
         </>
@@ -47,7 +47,6 @@ export default function Timeline(){
 }
 
 const TimelineBody = styled.div`
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -60,6 +59,5 @@ const TimelineBody = styled.div`
         padding: 16px 20px 16px 20px; 
         justify-content: space-between;
         align-items: flex-start;
-    } */
-
+    }  */
 `;

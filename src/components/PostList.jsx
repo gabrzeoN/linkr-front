@@ -4,7 +4,7 @@ import Header from "./Header";
 import Post from "./Post";
 
 export default function PostList ({posts, getPosts, loading}) {
-    
+
     function showPosts () {   
         if (posts.length > 0) {
             return posts.map((post, i)=> {
