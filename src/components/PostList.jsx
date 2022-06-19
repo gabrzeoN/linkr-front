@@ -8,7 +8,7 @@ export default function PostList ({posts, getPosts, loading}) {
     function showPosts () {   
         if (posts.length > 0) {
             return posts.map((post, i)=> {
-                const { userId, name, image,id , url, metadata, message } = post;
+                const { userId, name, image, id , url, metadata, message } = post;
                 return (
                     <>
                         <Post  key={i} userId={userId} name={name} image={image} id={id} url={url} 
