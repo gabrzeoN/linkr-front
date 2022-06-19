@@ -1,37 +1,10 @@
-import { useEffect, useState } from "react";
+//import { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import Header from "./Header";
 import Post from "./Post";
 
-export default function PostList () {
-    const [posts, setPosts] = useState ([]);
-    const [loading, setLoading] = useState(true);
-    const token = localStorage.getItem('token');
-
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}` 
-        }
-    };
-
-    function getPosts() {
-        const promise = axios.get('http://localhost:5000/timeline', config);
-        promise.then (response => {
-            setLoading(false);
-            const { data } = response;
-            setPosts(data);
-        })
-        promise.catch (() => {
-            alert ('An error occured while trying to fetch the posts, please refresh the page');
-            /* navigate('/timeline');  */
-        });
-    }
-
-    useEffect(() => {
-        getPosts();
-    }, [token]);
-
+export default function PostList ({posts, getPosts, loading}) {
+    
     function showPosts () {   
         if (posts.length > 0) {
             return posts.map((post, i)=> {
@@ -39,7 +12,7 @@ export default function PostList () {
                 return (
                     <>
                         <Post  key={i} userId={userId} name={name} image={image} id={id} url={url} 
-                                metadata={metadata} message={message} 
+                                metadata={metadata} message={message} getPosts={getPosts}
                         />
                     </>
                 );

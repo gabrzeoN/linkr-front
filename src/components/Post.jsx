@@ -1,17 +1,15 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Like from "./Like";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-export default function Post ({ name, image, url, message, metadata, userId, id }) {
+export default function Post ({ name, image, url, message, metadata, userId, id , getPosts}) {
     const {userData} = useContext(UserContext); 
     const [editPost, setEditPost] = useState(false);
     const [disabled, setDisabled] = useState(false);
-    const navigate = useNavigate();
 
     const [inputValue, setInputValue] = useState(message);
     const previousInputValue = useRef(null);
@@ -40,8 +38,8 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
         promise.then((res) => {
             setInputValue(newPost.newMessage);
             setEditPost(false);
-            navigate("/timeline");            
-            });
+            getPosts();            
+        });
         promise.catch((err) => {
             Swal.fire({
                 icon: 'error',

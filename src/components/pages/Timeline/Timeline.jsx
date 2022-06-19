@@ -3,15 +3,44 @@ import PublishCard from "./../PublishCard/PublishCard.jsx";
 import PostList from "./../../PostList.jsx";
 import TimelineName from "./../../TimelineName.jsx";
 import styled from "styled-components";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function Timeline(){
+    const [posts, setPosts] = useState ([]);
+    const [loading, setLoading] = useState(true);
+    const token = localStorage.getItem('token');
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}` 
+        }
+    };
+
+    function getPosts() {
+        const promise = axios.get('http://localhost:5000/timeline', config);
+        setLoading(true);
+        promise.then (response => {
+            setLoading(false);
+            const { data } = response;
+            setPosts(data);
+        })
+        promise.catch (() => {
+            alert ('An error occured while trying to fetch the posts, please refresh the page');
+            /* navigate('/timeline');  */
+        });
+    }
+
+    useEffect(() => {
+        getPosts();
+    }, [token]);
     return (
         <>
             <TimelineBody>
                 <Header />
                 <TimelineName />
                 <PublishCard />
-                <PostList />
+                <PostList posts={posts} getPosts={getPosts} loading={loading}/>
             </TimelineBody>
         </>
     );
