@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Like from "./Like";
 import Swal from "sweetalert2";
 import axios from "axios";
+import IdentifyHashtag from "./IdentifyHashtag";
 
 export default function Post ({ name, image, url, message, metadata, userId, id }) {
     const {userData} = useContext(UserContext); 
@@ -74,7 +75,10 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                             disabled={disabled}
                     />
                 :
-                <PostMessage>{message}</PostMessage>}
+                    <PostMessage>
+                        <IdentifyHashtag>{message}</IdentifyHashtag>
+                    </PostMessage>
+                }
                 <PostLikes>
                     <Like postId={id} userId={userId}></Like>
                 </PostLikes>
