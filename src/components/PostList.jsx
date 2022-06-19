@@ -7,6 +7,7 @@ import Post from "./Post";
 export default function PostList () {
     const [posts, setPosts] = useState ([]);
     const [loading, setLoading] = useState(true);
+
     const token = localStorage.getItem('token');
 
     const config = {
@@ -22,9 +23,8 @@ export default function PostList () {
             const { data } = response;
             setPosts(data);
         })
-        promise.catch (() => {
-            alert ('An error occured while trying to fetch the posts, please refresh the page');
-            /* navigate('/timeline');  */
+        promise.catch (e => {
+            alert ('An error occured while trying to fetch the posts, please refresh the page', e);
         });
     }
 
