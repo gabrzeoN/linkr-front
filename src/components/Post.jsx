@@ -177,7 +177,7 @@ const UserPic = styled.img`
 
 const UserName = styled.div`
 
-    width: 502px;
+    width: fit-content;
     height: 23px;
 
     margin-top: 5px;
@@ -253,9 +253,12 @@ const MetaTitle = styled.div`
     margin-left: 10px;
 
     width: 328px;
+    height: 45px;
     font-size: 16px;
     font-weight: bold;
     color: #CECECE;
+
+    overflow: hidden;
 
 `;
 
@@ -267,17 +270,21 @@ const MetaDescription = styled.div`
     margin-left: 10px;
 
     width: 328px;
+    height: 66px;
     font-size: 13px;
     color: #9B9595;
+
+    overflow: hidden;
 
 `;
 
 const MetaLink = styled.div`
     
-    margin-top: 120px;
+    margin-top: 122px;
     margin-left: 10px;
     
     width: 328px;
+    height: 30px;
     font-size: 10px;
     color: #CECECE;
 
@@ -289,6 +296,8 @@ const MetaLink = styled.div`
         text-decoration: none;
         color: #CECECE;
     }
+
+    overflow: hidden;
 
 `;
 
