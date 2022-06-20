@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
 import styled from "styled-components";
@@ -11,6 +12,8 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
     const {userData} = useContext(UserContext); 
     const [editPost, setEditPost] = useState(false);
     const [disabled, setDisabled] = useState(false);
+
+    const navigate = useNavigate();
 
     const [inputValue, setInputValue] = useState(message);
     const previousInputValue = useRef(null);
@@ -56,7 +59,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
         <SinglePost>
             <PostAuth>
                 <UserPic src={image} height={50} width={50} alt={'user-image'} />
-                <UserName>{name}</UserName>
+                <UserName onClick={() => navigate(`/users/${userId}`)}>{name}</UserName>
                 {userId === userData.id ? 
                 <DivIcon>
                     <FaPencilAlt onClick={() => setEditPost(!editPost)} color="#ffffff" size={16} />
@@ -148,6 +151,8 @@ const UserName = styled.div`
     margin-left: 18px;
 
     color: white;
+
+    cursor: pointer;
 
 `;
 
