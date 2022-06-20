@@ -152,6 +152,8 @@ const UserName = styled.div`
 
     color: white;
 
+    cursor: pointer;
+
 `;
 
 const PostInfo = styled.div`

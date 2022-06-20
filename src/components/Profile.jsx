@@ -47,4 +47,6 @@ const ProfileName = styled.div`
     font-family: Lato;
     color: #515151;
 
+    cursor: pointer;
+
 `;
