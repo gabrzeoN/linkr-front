@@ -4,10 +4,9 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import "./../assets/css/reset.css";
 import "../assets/css/style.css";
 import UserContext from "../contexts/UserContext";
-
-import SignInPage from "./pages/Sing-in/SignInPage.jsx";
-import SignUp from "./pages/Sign-up";
-import Timeline from "./pages/Timeline/Timeline.jsx";
+import SignInPage from "./pages/SingIn/index.jsx";
+import SignUp from "./pages/SignUp/index.jsx";
+import Timeline from "./pages/Timeline/index.jsx";
 
 export default function App(){
     const [userData, setUserData] = useState(null);

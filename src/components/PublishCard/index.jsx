@@ -1,5 +1,5 @@
 import { Container, Picture, Div, Title, Form, Inputs, Text, Buttons } from "./style";
-import UserContext from "../../../contexts/UserContext";
+import UserContext from "../../contexts/UserContext";
 import { useState, useContext } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";

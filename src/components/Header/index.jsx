@@ -1,18 +1,17 @@
-import axios from "axios";
 import Swal from "sweetalert2";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
 import SearchBar from "../SearchBar";
-import UserContext from "../../contexts/UserContext";
-import { HeaderContent, Options, OptionsBar, Logout, HideOptions } from "./style";
+import UserContext from "../../contexts/UserContext.jsx";
+import { HeaderContent, Options, OptionsBar, Logout, HideOptions } from "./style.js";
+import authApi from "../../services/api/auth.js";
 
 export default function Header(){
-    const patchLogoutURL = `http://localhost:5000/sign-out`;
-    const {userData} = useContext(UserContext);
-    //const {image, token} = userData;
-
     const [arrow, setArrow] = useState("down")
     const [optionsBar, setOptionsBar] = useState(false);
+    const {userData, setUserData} = useContext(UserContext);
+    const {name, image} = userData;
     const navigate = useNavigate();
 
     const config = {
@@ -30,8 +29,9 @@ export default function Header(){
         setArrow("down");
         setOptionsBar(false);
         try{
-            await axios.patch(patchLogoutURL, {}, config);
+            await authApi.signOut(config);
             navigate("/");
+            setUserData(null);
         }catch(error){
             Swal.fire({
                 icon: 'error',
@@ -48,7 +48,7 @@ export default function Header(){
             <SearchBar />
             <Options onClick={() => openCloseOptionsBar()}>
                 <ion-icon name={`chevron-${arrow}-outline`}></ion-icon>
-                <img src={userData.image} alt={userData.name}></img>
+                <img src={image} alt={name}></img>
             </Options>
             <OptionsBar optionsBar={optionsBar}>
                 <Logout onClick={() => logout()}>Logout</Logout>

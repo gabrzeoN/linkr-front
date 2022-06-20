@@ -63,7 +63,6 @@ export const Options = styled.div`
         margin-right: 10px;
         pointer-events: none;
     }
-
     img{
         width: 53px;
         height: 53px;
@@ -71,7 +70,6 @@ export const Options = styled.div`
     }
 
     @media only screen and (max-width: 600px) {
-        
         margin-right: 220px;
         position: absolute;
         cursor: pointer;
@@ -84,7 +82,6 @@ export const Options = styled.div`
             margin-right: 10px;
             pointer-events: none;
         }
-
         img{
             width: 41px;
             height: 41px;

@@ -1,11 +1,12 @@
 import { useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
-import Loading from "../../../assets/Loading"
-import api from "../../../services/api"
 import Swal from 'sweetalert2';
-import { Main, StyledButton, CenterLoader } from "../Sing-in/style";
+import { useNavigate, Link } from "react-router-dom"
 
-function SignUp() {
+import Loading from "../../../assets/Loading"
+import authApi from "../../../services/api/auth.js";
+import { Main, StyledButton, CenterLoader } from "../SingIn/style.js";
+
+export default function SignUp() {
     const [button, setButton] = useState(true);
     const [formData, setFormData] = useState({
         name: "",
@@ -32,7 +33,7 @@ function SignUp() {
             setButton(true)
             return;
         } else {
-            const promise = api.signUp(formData);
+            const promise = authApi.signUp(formData);
             setButton(false)
             promise.then(() => {
                 navigate("/");
@@ -136,7 +137,6 @@ function SignUp() {
                         :
                         <StyledButton Loading={true}><CenterLoader><Loading height={35} width={43} /></CenterLoader></StyledButton>
                     }
-                    
                 </form>
                 <Link to="/">
                     <p>Switch back to log in</p>
@@ -145,8 +145,3 @@ function SignUp() {
         </Main>
     )
 }
-
-export default SignUp
-
-
-

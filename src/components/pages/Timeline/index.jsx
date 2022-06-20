@@ -1,10 +1,10 @@
-import Header from "../../Header/index.jsx";
-import PublishCard from "./../PublishCard/PublishCard.jsx";
-import PostList from "./../../PostList.jsx";
-import TimelineName from "./../../TimelineName.jsx";
-import styled from "styled-components";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { useState, useEffect } from "react";
+
+import Header from "../../Header/index.jsx";
+import PublishCard from "./../../PublishCard/index.js";
+import PostList from "./../../PostList.jsx";
+import { TimelineBody } from "./style.js";
 
 export default function Timeline(){
     const [posts, setPosts] = useState ([]);
@@ -33,30 +33,13 @@ export default function Timeline(){
     useEffect(() => {
         getPosts();
     }, []);
+    
     return (
-        <>
-            <TimelineBody>
-                <Header />
-                <TimelineName />
-                <PublishCard getPosts={getPosts}/>
-                <PostList posts={posts} getPosts={getPosts} loading={loading}/>
-            </TimelineBody>
-        </>
+        <TimelineBody>
+            <Header />
+            <TimelineName />
+            <PublishCard getPosts={getPosts}/>
+            <PostList posts={posts} getPosts={getPosts} loading={loading}/>
+        </TimelineBody>
     );
 }
-
-const TimelineBody = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    /* @media only screen and (min-width: 600px) {
-        width: 611px;
-        height: 209px;
-        border-radius: 16px;
-        
-        padding: 16px 20px 16px 20px; 
-        justify-content: space-between;
-        align-items: flex-start;
-    }  */
-`;

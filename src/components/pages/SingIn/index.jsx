@@ -1,13 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import axios from "axios";
 import Swal from 'sweetalert2';
-import { Main } from "./style";
 
+import { Main } from "./style.js";
+import authApi from "../../../services/api/auth.js";
 import UserContext from "../../../contexts/UserContext";
 
 export default function SignInPage(){
-    const postLoginURL = "http://localhost:5000/sign-in"; 
     const {setUserData} = useContext(UserContext);
     const [loginData, setLoginData] = useState({email: "", password: ""});
     const [disabled, setDisabled] = useState(false);
@@ -17,7 +16,7 @@ export default function SignInPage(){
         e.preventDefault();
         setDisabled(true);
         try{
-            const {data} = await axios.post(postLoginURL, loginData);
+            const {data} = await authApi.signIn(loginData);
             const {id, name, image, token} = data;
             setUserData({id, name, image, token});
             localStorage.setItem('token', token);
@@ -65,4 +64,3 @@ export default function SignInPage(){
         </Main>
     );
 }
-

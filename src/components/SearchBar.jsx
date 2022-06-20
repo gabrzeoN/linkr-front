@@ -6,11 +6,9 @@ import styled from "styled-components";
 import searchIcon from "../assets/img/search.png";
 
 export default function SearchBar () {
-
     const [searchResult, setSearchResult] = useState('');
     const [searchProfiles, setSearchProfiles] = useState([]);
     const [searching, setSearching] = useState(false);
-
     const previousInputValue = useRef(null);
 
     function profileSearch () {
