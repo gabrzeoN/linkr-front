@@ -18,12 +18,18 @@ export default function Timeline(){
     };
 
     function getPosts() {
-        const promise = axios.get('http://localhost:5000/timeline', config);
+        const promise = axios.get('https://linkr-mggg.herokuapp.com/timeline', config);
         setLoading(true);
         promise.then (response => {
             setLoading(false);
+            console.log(response);
             const { data } = response;
-            setPosts(data);
+            if(typeof data === String){
+                setPosts([...data]);
+            }else {
+                setPosts(data);
+            }
+            
         })
         promise.catch (() => {
             alert ('An error occured while trying to fetch the posts, please refresh the page');

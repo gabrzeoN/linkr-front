@@ -16,7 +16,7 @@ export default function PublishCard({getPosts}){
         e.preventDefault();
         setDisabled(true);
 
-        const URL = "http://localhost:5000/posts";
+        const URL = "https://linkr-mggg.herokuapp.com/posts";
         const promise = axios.post(URL, post, config);
         promise.then(() => {
             setDisabled(false);
