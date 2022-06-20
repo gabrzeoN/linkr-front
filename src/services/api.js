@@ -2,6 +2,10 @@ import axios from "axios";
 
 const BASE_URL="http://localhost:5000";
 
+function createHeaders(token) {
+    return { headers: { Authorization: `Bearer ${token}` } };
+}
+
 async function signUp(formData) {
     const promise = await axios.post(`${BASE_URL}/sign-up`, formData)
     return promise;

@@ -1,11 +1,11 @@
 import ReactHashtag from "@mdnm/react-hashtag";
 import { useState, useEffect } from "react";
-import Loading from "../../Assets/Loading";
-import UserContext from "../../contexts/UserContext"
-import api from "../../services/api";
+import Loading from "../../../assets/Loading";
+import UserContext from "../../../contexts/UserContext"
+import api from "../../../services/api";
 import { TrendingBox, Title, Separator } from "./style";
 
-export default function Trends() {
+export default function Trending() {
   const { user, hashtagRedirect } = UserContext();
   const [trending, setTrending] = useState();
   const [loading, setLoading] = useState();

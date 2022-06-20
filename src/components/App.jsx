@@ -8,6 +8,7 @@ import UserContext from "../contexts/UserContext";
 import SignInPage from "./pages/Sing-in/SignInPage.jsx";
 import SignUp from "./pages/Sign-up";
 import Timeline from "./pages/Timeline.jsx";
+import Hashtag from "./pages/Hashtag"
 
 export default function App(){
     const [userData, setUserData] = useState(null);
@@ -18,6 +19,7 @@ export default function App(){
                         <Route path="/" element={<SignInPage/>} />
                         <Route path="/sign-up" element={<SignUp/>} />
                         <Route path="/timeline" element={<Timeline />} ></Route>
+                        <Route path="/hashtag/:hashtag" element={<Hashtag />} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
