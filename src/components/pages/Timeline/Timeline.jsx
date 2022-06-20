@@ -27,13 +27,12 @@ export default function Timeline(){
         })
         promise.catch (() => {
             alert ('An error occured while trying to fetch the posts, please refresh the page');
-            /* navigate('/timeline');  */
         });
     }
 
     useEffect(() => {
         getPosts();
-    }, [token]);
+    }, []);
     return (
         <>
             <TimelineBody>
