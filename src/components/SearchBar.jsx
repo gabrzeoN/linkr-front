@@ -16,7 +16,7 @@ export default function SearchBar () {
     function profileSearch () {
         if(searchResult.length >= 3) {
             console.log(searchResult);
-            const promise = axios.get(`http://localhost:5000/search?name=${searchResult}`);
+            const promise = axios.get(`https://linkr-mggg.herokuapp.com/search?name=${searchResult}`);
             promise.then (response => {
                 const {data} = response;
                 console.log(data[0].name);

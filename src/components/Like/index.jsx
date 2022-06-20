@@ -8,8 +8,8 @@ import UserContext from "../../contexts/UserContext";
 import { LikedContent, NotLikedContent } from "./style";
 
 export default function Like({postId}){
-    const postLikeURL = `http://localhost:5000/likes/${postId}`;
-    const getLikeURL = `http://localhost:5000/likes/${postId}`;
+    const postLikeURL = `https://linkr-mggg.herokuapp.com/${postId}`;
+    const getLikeURL = `https://linkr-mggg.herokuapp.com/${postId}`;
     const {userData} = useContext(UserContext);
     const {token} = userData;
     const [liked, setLiked] = useState(null);

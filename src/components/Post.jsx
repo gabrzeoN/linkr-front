@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
 import styled from "styled-components";
-import Like from "./Like";
+//import Like from "./Like";
 import Swal from "sweetalert2";
 import axios from "axios";
 import IdentifyHashtag from "./IdentifyHashtag";
 
 export default function Post ({ name, image, url, message, metadata, userId, id , getPosts}){
-    const {userData} = useContext(UserContext); 
+    const {userData, user, setUser} = useContext(UserContext); 
     const [editPost, setEditPost] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [inputValue, setInputValue] = useState(message);
@@ -17,7 +17,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
     const navigate = useNavigate();
 
     const config = {headers: {Authorization: `Bearer ${userData.token}` }};
-    const URL = "http://localhost:5000/posts";
+    const URL = "https://linkr-mggg.herokuapp.com/";
 
     useEffect(() => {
         previousInputValue.current = inputValue;
@@ -67,7 +67,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
             reverseButtons: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.delete(`http://localhost:5000/posts/${postId}`, config )
+                return axios.delete(`https://linkr-mggg.herokuapp.com/${postId}`, config )
                         .then(response => 
                             Swal.isLoading())
                         .catch(error => {Swal.showValidationMessage(`Request failed: ${error}`)})
@@ -91,7 +91,11 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
             <SinglePost>
                 <PostAuth>
                     <UserPic src={image} height={50} width={50} alt={'user-image'} />
-                    <UserName onClick={() => navigate(`/users/${userId}`)}>{name}</UserName>
+                    <UserName onClick={() => {setUser({...user, id:userId});
+                        navigate(`/user/${userId}`)}}
+                        >
+                        {name}
+                    </UserName>
                     {userId === userData.id ? 
                     <DivIcon>
                         <FaPencilAlt onClick={() => setEditPost(!editPost)} color="#ffffff" size={16} />
@@ -113,7 +117,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                         </PostMessage>
                     }
                     <PostLikes>
-                        <Like postId={id} userId={userId}></Like>
+                        {/* <Like postId={id} userId={userId}></Like> */}
                     </PostLikes>
                     <PostMetadata target="_blank" rel="noreferrer" href={url}>
                         <MetaTitle>{metadata.title}</MetaTitle>
