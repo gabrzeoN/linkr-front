@@ -7,7 +7,7 @@ export default function Profile ({ id, name, image }) {
 
     return (
 
-        <SingleProfile onClick={()=> navigate(`/users/${id}`)}>
+        <SingleProfile onClick={()=> navigate(`/user/${id}`)}>
             <ProfilePic src={image} width={39} height={39} alt={"user-pic"} />
             <ProfileName>{name}</ProfileName>
         </SingleProfile>
