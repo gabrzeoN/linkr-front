@@ -8,15 +8,16 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import IdentifyHashtag from "./IdentifyHashtag";
 
-export default function Post ({ name, image, url, message, metadata, userId, id , getPosts}) {
+export default function Post ({ name, image, url, message, metadata, userId, id , getPosts}){
     const {userData} = useContext(UserContext); 
     const [editPost, setEditPost] = useState(false);
     const [disabled, setDisabled] = useState(false);
-
-    const navigate = useNavigate();
-
     const [inputValue, setInputValue] = useState(message);
     const previousInputValue = useRef(null);
+    const navigate = useNavigate();
+
+    const config = {headers: {Authorization: `Bearer ${userData.token}` }};
+    const URL = "http://localhost:5000/posts";
 
     useEffect(() => {
         previousInputValue.current = inputValue;
@@ -36,8 +37,6 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
 
     function updatePost(inputValue){
         const newPost = { postId: id, userId: userId, newMessage:inputValue }
-        const URL = "http://localhost:5000/posts";
-        const config = {headers: {Authorization: `Bearer ${localStorage.getItem('token')}` }};
         const promise = axios.put(URL, newPost, config);
         promise.then((res) => {
             setInputValue(newPost.newMessage);
@@ -53,44 +52,78 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
             setDisabled(false);
         });
     }
-  
-    return (
 
-        <SinglePost>
-            <PostAuth>
-                <UserPic src={image} height={50} width={50} alt={'user-image'} />
-                <UserName onClick={() => navigate(`/users/${userId}`)}>{name}</UserName>
-                {userId === userData.id ? 
-                <DivIcon>
-                    <FaPencilAlt onClick={() => setEditPost(!editPost)} color="#ffffff" size={16} />
-                    <FaTrashAlt color="#ffffff" size={16}/>
-                </DivIcon> : <></>}
-            </PostAuth>
-            <PostInfo>
-                {editPost ? 
-                    <EditMessage autoFocus ref={previousInputValue}
-                            type="text" 
-                            value={inputValue} 
-                            onChange={e => setInputValue(e.target.value)}
-                            onKeyDown={(e) => updateMessage(e)}
-                            disabled={disabled}
-                    />
-                :
-                    <PostMessage>
-                        <IdentifyHashtag>{message}</IdentifyHashtag>
-                    </PostMessage>
-                }
-                <PostLikes>
-                    <Like postId={id} userId={userId}></Like>
-                </PostLikes>
-                <PostMetadata target="_blank" rel="noreferrer" href={url}>
-                    <MetaTitle>{metadata.title}</MetaTitle>
-                    <MetaDescription>{metadata.description}</MetaDescription>
-                    <MetaLink>{url}</MetaLink>
-                    <MetaImage src={metadata.image} height={155} width={155} alt={'article-image'} />
-                </PostMetadata>
-            </PostInfo>
-        </SinglePost>
+    function deletePost(id){
+        const postId = id;
+        Swal.fire({
+            title: 'Are you sure you want to delete this post?',
+            color: '#ffffff',
+            background: '#333333',
+            confirmButtonColor: '#1877F2',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            showCancelButton: true,
+            cancelButtonText: 'No, go back!',
+            reverseButtons: true,
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return axios.delete(`http://localhost:5000/posts/${postId}`, config )
+                        .then(response => 
+                            Swal.isLoading())
+                        .catch(error => {Swal.showValidationMessage(`Request failed: ${error}`)})
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title:'Deleted!', 
+                        text:'Your post has been deleted.',
+                        icon:'success', 
+                        background:'#333333',
+                        color:'#fff'
+                    });
+                    getPosts();
+                }})
+    }
+    
+    return (
+        <>
+            <SinglePost>
+                <PostAuth>
+                    <UserPic src={image} height={50} width={50} alt={'user-image'} />
+                    <UserName onClick={() => navigate(`/users/${userId}`)}>{name}</UserName>
+                    {userId === userData.id ? 
+                    <DivIcon>
+                        <FaPencilAlt onClick={() => setEditPost(!editPost)} color="#ffffff" size={16} />
+                        <FaTrashAlt onClick={() => deletePost(id)} color="#ffffff" size={16}/>
+                    </DivIcon> : <></>}
+                </PostAuth>
+                <PostInfo>
+                    {editPost ? 
+                        <EditMessage autoFocus ref={previousInputValue}
+                                type="text" 
+                                value={inputValue} 
+                                onChange={e => setInputValue(e.target.value)}
+                                onKeyDown={(e) => updateMessage(e)}
+                                disabled={disabled}
+                        />
+                    :
+                        <PostMessage>
+                            <IdentifyHashtag>{message}</IdentifyHashtag>
+                        </PostMessage>
+                    }
+                    <PostLikes>
+                        <Like postId={id} userId={userId}></Like>
+                    </PostLikes>
+                    <PostMetadata target="_blank" rel="noreferrer" href={url}>
+                        <MetaTitle>{metadata.title}</MetaTitle>
+                        <MetaDescription>{metadata.description}</MetaDescription>
+                        <MetaLink>{url}</MetaLink>
+                        <MetaImage src={metadata.image} height={155} width={155} alt={'article-image'} />
+                    </PostMetadata>
+                </PostInfo>
+            </SinglePost>
+        </>
         
     );
 }
