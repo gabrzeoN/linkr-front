@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const HeaderContent = styled.header`
     height: 72px;
+
     z-index: 5;
 
     display: flex;
@@ -28,10 +29,10 @@ export const HeaderContent = styled.header`
     }
 
     @media only screen and (max-width: 600px) {
-        padding: 0 17px;
         h1{
             font-size: 45px;
         }
+
     }
 
 `;
@@ -44,18 +45,15 @@ export const Options = styled.div`
     gap: 16px;
 
     z-index: 5;
-    
     ion-icon{
         font-size: 40px;
         pointer-events: none;
     }
-
     img{
         width: 53px;
         height: 53px;
         border-radius: 50%;
     }
-
     @media only screen and (max-width: 600px) {
         gap: 8px;
 
@@ -91,20 +89,21 @@ export const OptionsBar = styled.div`
     ${({optionsBar}) => {
         return optionsBar ? "" : "display: none;"
     }};
-
 `;
 
 export const Logout = styled.div`
+
     font-family: 'Lato';
     font-weight: 700;
     font-size: 17px;
     line-height: 20px;
     letter-spacing: 0.05em;
     color: #FFFFFF;
-    
+
 `;
 
 export const HideOptions = styled.div`
+
     position: fixed;
     top: 0px;
     left: 0px;
@@ -114,4 +113,5 @@ export const HideOptions = styled.div`
     ${({optionsBar}) => {
         return optionsBar ? "" : "display: none;"
     }};
+
 `;
