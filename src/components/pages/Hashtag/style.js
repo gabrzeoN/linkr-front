@@ -1,15 +1,14 @@
 import styled from "styled-components";
 
-export const Container = styled.main`
+const Container = styled.main`
     width: 100%;
     min-height: 100vh;
     display: flex;
     margin-top: 72px;
     background-color: #333333;
-    
 `;
 
-export const LeftWrapper = styled.div`
+const LeftWrapper = styled.div`
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -20,21 +19,8 @@ export const LeftWrapper = styled.div`
         width: 100%;
     }
 `;
-export const TimelineName = styled.div`
-    position: absolute;
-    margin-top: 53px; 
-    padding-right: 470px;
-    font-size: 43px;
-    font-family: Oswald, sans-serif;
-    font-weight: bold;
-    color: white;
-    @media only screen and (max-width: 600px) {
-        margin-top: 100px;
-        padding-right: 200px;
-    }
-`;
 
-export const RightWrapper = styled.div`
+const RightWrapper = styled.div`
     width: 40%;
     padding-left: 25px;
     display: flex;
@@ -47,7 +33,7 @@ export const RightWrapper = styled.div`
     }
 `;
 
-export const TimelineBody = styled.div`
+const TimelineBody = styled.div`
     width: 100%;
     display: flex; 
     flex-direction: column;
@@ -62,3 +48,32 @@ export const TimelineBody = styled.div`
         align-items: center;
     }
 `;
+
+const TitleContainer = styled.p`
+    width: 90%;
+    text-align: left;
+    margin-top: 53px;  
+    margin-bottom: 43px;
+    word-break: break-all;
+    font-size: 43px;
+    font-weight: 700;
+    line-height: 49px;
+    color: #FFF;
+    font-family: "Oswald", sans-serif;
+    @media (max-width: 610px) {
+        font-size: 33px;
+        margin: 19px 0;
+        padding-left: 17px;
+    }
+    @media (min-width: 912px) {
+        width: 72%;
+    }
+`
+
+export{
+    Container,
+    LeftWrapper,
+    RightWrapper,
+    TimelineBody,
+    TitleContainer
+}

@@ -6,7 +6,7 @@ export const SinglePost = styled.div`
 
     display: flex;
     justify-content: center;
-    padding: 9px 15px 15px 15px;
+    padding: 15px 15px 15px 15px;
     gap:18px;
 
     background-color: #171717;
@@ -132,8 +132,6 @@ export const PostLikes = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
-    position:absolute;
 `;
 
 export const PostMetadata = styled.a`
@@ -147,6 +145,7 @@ export const PostMetadata = styled.a`
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 7px;
 
     @media only screen and (min-width: 600px) {
@@ -157,6 +156,8 @@ export const PostMetadata = styled.a`
 
 export const Div = styled.div`
     padding-left: 11px;
+
+    width:165px;
 
     display: flex;
     flex-direction: column;
@@ -227,7 +228,8 @@ export const MetaImage = styled.img`
 
     border-left: 1px solid #303030;
     border-radius: 0px 11px 11px 0px;
-    object-fit: cover;
+    overflow:hidden;
+    object-fit: cover; 
 
     @media only screen and (min-width: 600px) {
         width: 153.44px;
