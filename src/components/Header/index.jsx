@@ -7,7 +7,7 @@ import UserContext from "../../contexts/UserContext";
 import { HeaderContent, Options, OptionsBar, Logout, HideOptions } from "./style";
 
 export default function Header(){
-    const patchLogoutURL = "https://linkr-mggg.herokuapp.com/";
+    const patchLogoutURL = "https://linkr-mggg.herokuapp.com/sign-out";
     const {userData} = useContext(UserContext);
     //const {image, token} = userData;
 

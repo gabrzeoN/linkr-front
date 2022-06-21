@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
 import UserContext from "../contexts/UserContext";
 import styled from "styled-components";
-//import Like from "./Like";
+import Like from "./Like";
 import Swal from "sweetalert2";
 import axios from "axios";
 import IdentifyHashtag from "./IdentifyHashtag";
@@ -117,7 +117,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                         </PostMessage>
                     }
                     <PostLikes>
-                        {/* <Like postId={id} userId={userId}></Like> */}
+                        <Like postId={id} userId={userId}></Like>
                     </PostLikes>
                     <PostMetadata target="_blank" rel="noreferrer" href={url}>
                         <MetaTitle>{metadata.title}</MetaTitle>
