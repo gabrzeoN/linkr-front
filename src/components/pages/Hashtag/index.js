@@ -23,11 +23,7 @@ export default function TagPage() {
       setLoading(false);
       console.log(res);
       const { data } = res;
-      if (typeof data === String) {
-        setPosts([...data]);
-      } else {
-        setPosts(data);
-      }
+      setPosts([...data]);
     })
     promise.catch((err) => {
       alert('An error occured while trying to fetch the posts, please refresh the page');
@@ -48,7 +44,7 @@ export default function TagPage() {
             <TitleContainer>
               # {hashtag}
             </TitleContainer>
-            {/* <PostList posts={posts} getPosts={getTagPosts} loading={loading} /> */}
+            <PostList posts={posts} getPosts={getTagPosts} loading={loading} />
           </TimelineBody>
         </LeftWrapper>
         <RightWrapper>
