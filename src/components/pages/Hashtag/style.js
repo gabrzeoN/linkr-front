@@ -1,56 +1,79 @@
 import styled from "styled-components";
 
-const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  margin-top: 72px;
-  }
+const Container = styled.main`
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    margin-top: 72px;
+    background-color: #333333;
 `;
 
-const Topo = styled.div`
-  width: 100%;
-  height: 158px;
-  h1 {
+const LeftWrapper = styled.div`
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #333333;
+
+    @media (max-width: 600px) {
+        width: 100%;
+    }
+`;
+
+const RightWrapper = styled.div`
+    width: 40%;
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #333333;
+
+    @media (max-width: 767px) {
+        display: none;
+    }
+`;
+
+const TimelineBody = styled.div`
+    width: 100%;
+    display: flex; 
+    flex-direction: column;
+    align-items: flex-end;
+    padding-bottom: 100px;
+
+    @media (max-width: 610px) {
+        width: 100%;
+    }
+    @media (max-width: 600px) {
+        width: 100%;
+        align-items: center;
+    }
+`;
+
+const TitleContainer = styled.p`
+    width: 90%;
+    text-align: left;
+    margin-top: 53px;  
+    margin-bottom: 43px;
+    word-break: break-all;
     font-size: 43px;
     font-weight: 700;
+    line-height: 49px;
+    color: #FFF;
     font-family: "Oswald", sans-serif;
-    font-style: normal;
-    line-height: 63.73px;
-    color: #ffffff;
-    margin-top: 53px;
-    margin-bottom: 41px;
-  }
-`;
-
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-`;
-
-const Posts = styled.div`
-  width: 613px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  margin-right: 25px;
-`;
-
-const Loading = styled.div`
-  animation: is-rotating 1s infinite;
-  width: 25px;
-  height: 25px;
-  border: 4px solid #1877f2;
-  border-top-color: #ffffff;
-  border-radius: 50%;
-  margin-left: 300px;
-`;
+    @media (max-width: 610px) {
+        font-size: 33px;
+        margin: 19px 0;
+        padding-left: 17px;
+    }
+    @media (min-width: 912px) {
+        width: 72%;
+    }
+`
 
 export{
-    Main, 
-    Topo,
     Container,
-    Posts,
-    Loading
+    LeftWrapper,
+    RightWrapper,
+    TimelineBody,
+    TitleContainer
 }

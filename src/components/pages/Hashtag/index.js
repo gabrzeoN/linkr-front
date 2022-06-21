@@ -1,86 +1,61 @@
-import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import { Container, LeftWrapper, RightWrapper, TimelineBody, TitleContainer } from "./style.js";
 import Loading from "../../../assets/Loading.js";
 import Header from "../../Header/index.jsx";
 import Trending from "../Trending/index.js"
-import Post from "../../PostList.jsx"
+import PostList from "../../PostList.jsx"
 
 export default function TagPage() {
   const token = localStorage.getItem("token");
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { hashtag } = useParams();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        axios
-          .get(`https://linkr-mggg.herokuapp.com/hashtag/${hashtag}`, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-          .then((response) => {
-            const { data } = response;
-            setPosts(data);
-          })
-          .catch((e) => console.log(e));
-      } catch (e) {
-        alert("Erro ao receber dados dos posts");
-        console.log(e.response);
+  function getTagPosts() {
+    const promise = axios.get(`https://linkr-mggg.herokuapp.com/hashtag/${hashtag}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    setLoading(true);
+    promise.then(res => {
+      setLoading(false);
+      console.log(res);
+      const { data } = res;
+      if (typeof data === String) {
+        setPosts([...data]);
+      } else {
+        setPosts(data);
       }
-    })();
-  }, [hashtag]);
+    })
+    promise.catch((err) => {
+      alert('An error occured while trying to fetch the posts, please refresh the page');
+      console.log(err);
+    })
+  }
+
+  useEffect(() => {
+    getTagPosts();
+  }, []);
 
   return (
     <>
-      <Header />
-      <Main>
-        <Topo>
-          <h1># {hashtag}</h1>
-        </Topo>
-        <Container>
-          {/* <Posts>{posts ? posts.map((post) => Post(post)) : <Loading />}</Posts> */}
+      <Container>
+        <LeftWrapper>
+          <TimelineBody>
+            <Header />
+            <TitleContainer>
+              # {hashtag}
+            </TitleContainer>
+            {/* <PostList posts={posts} getPosts={getTagPosts} loading={loading} /> */}
+          </TimelineBody>
+        </LeftWrapper>
+        <RightWrapper>
           <Trending />
-        </Container>
-      </Main>
+        </RightWrapper>
+      </Container>
     </>
   );
 }
 
-const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  margin-top: 72px;
-  }
-`;
-
-const Topo = styled.div`
-  width: 100%;
-  height: 158px;
-  h1 {
-    font-size: 43px;
-    font-weight: 700;
-    font-family: "Oswald", sans-serif;
-    font-style: normal;
-    line-height: 63.73px;
-    color: #ffffff;
-    margin-top: 53px;
-    margin-bottom: 41px;
-  }
-`;
-
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-`;
-
-const Posts = styled.div`
-  width: 613px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  margin-right: 25px;
-`;
