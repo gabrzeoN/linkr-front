@@ -9,6 +9,7 @@ import SignInPage from "./pages/Sing-in/SignInPage.jsx";
 import SignUp from "./pages/Sign-up";
 import Timeline from "./pages/Timeline/Timeline.jsx";
 import UserPage from "./pages/UserPage/UserPage.jsx";
+import TagPage from "./pages/Hashtag";
 
 export default function App(){
     const [userData, setUserData] = useState(null);
@@ -20,6 +21,7 @@ export default function App(){
                         <Route path="/" element={<SignInPage/>} />
                         <Route path="/sign-up" element={<SignUp/>} />
                         <Route path="/timeline" element={<Timeline/>} />
+                        <Route path='/hashtag/:hashtag' element={<TagPage />} />
                         <Route path="/user/:id" element={<UserPage/>} />
                 </Routes>
             </BrowserRouter>

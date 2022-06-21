@@ -1,10 +1,12 @@
+import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { Main, Topo, Container, Posts, Loading } from "./style";
-import Trending from "../Trending";
-// import Post from "./../Post.js; TODO: importar os posts aqui (não importar o publish);
+import Loading from "../../../assets/Loading.js";
+import Header from "../../Header/index.jsx";
+import Trending from "../Trending/index.js"
+import Post from "../../PostList.jsx"
 
 export default function TagPage() {
   const token = localStorage.getItem("token");
@@ -15,7 +17,7 @@ export default function TagPage() {
     (async () => {
       try {
         axios
-          .get(`localhost:5000/hashtag/${hashtag}`, {
+          .get(`https://linkr-mggg.herokuapp.com/hashtag/${hashtag}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
           .then((response) => {
@@ -32,15 +34,53 @@ export default function TagPage() {
 
   return (
     <>
+      <Header />
       <Main>
         <Topo>
           <h1># {hashtag}</h1>
         </Topo>
         <Container>
-          <Posts>{posts ? posts.map((post) => Post(post)) : <Loading />}</Posts>
+          {/* <Posts>{posts ? posts.map((post) => Post(post)) : <Loading />}</Posts> */}
           <Trending />
         </Container>
       </Main>
     </>
   );
 }
+
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  margin-top: 72px;
+  }
+`;
+
+const Topo = styled.div`
+  width: 100%;
+  height: 158px;
+  h1 {
+    font-size: 43px;
+    font-weight: 700;
+    font-family: "Oswald", sans-serif;
+    font-style: normal;
+    line-height: 63.73px;
+    color: #ffffff;
+    margin-top: 53px;
+    margin-bottom: 41px;
+  }
+`;
+
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+`;
+
+const Posts = styled.div`
+  width: 613px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-right: 25px;
+`;
