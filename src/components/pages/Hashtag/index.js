@@ -23,7 +23,11 @@ export default function TagPage() {
       setLoading(false);
       console.log(res);
       const { data } = res;
-      setPosts([...data]);
+      if (typeof data === String) {
+        setPosts([...data]);
+      } else {
+        setPosts(data);
+      }
     })
     promise.catch((err) => {
       alert('An error occured while trying to fetch the posts, please refresh the page');
