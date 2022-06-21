@@ -74,14 +74,19 @@ const SearchingContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: static; 
     margin-left: auto;
     margin-right: auto;
 
     @media only screen and (max-width: 600px) {
-        margin-top: 85px;
-        margin-left: auto;
-        margin-right: auto;
+        position: absolute;
+        margin-left: 20px;
+        margin-top: 130px;
+    }
+
+    @media only screen and (max-width: 400px) {
+        position: absolute;
+        margin-left: -20px;
+        margin-top: 130px;
     }
 
 `;
@@ -175,7 +180,7 @@ const SearchingResults = styled.div`
 
     height: fit-content;
 
-    margin-top: 46px;
+    top: 60px;
     
     display: flex;
     flex-direction: column;
@@ -186,6 +191,8 @@ const SearchingResults = styled.div`
     @media only screen and (max-width: 600px) {
 
         width: 350px;
+
+        margin-top: -35px;
 
         display: flex;
         display-direction: column;
