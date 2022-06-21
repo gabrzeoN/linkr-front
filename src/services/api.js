@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const BASE_URL="http://localhost:5000";
+const BASE_URL="https://linkr-mggg.herokuapp.com";
+
+function createHeaders(token) {
+    return { headers: { Authorization: `Bearer ${token}` } };
+}
 
 function createHeaders(token) {
     return { headers: { Authorization: `Bearer ${token}` } };
@@ -23,4 +27,4 @@ const api={
     getTrendingHashtags
 }
 
-export default api;
+export default api; 

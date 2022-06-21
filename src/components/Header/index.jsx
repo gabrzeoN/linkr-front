@@ -2,20 +2,22 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
+import SearchBar from "../SearchBar";
 import UserContext from "../../contexts/UserContext";
 import { HeaderContent, Options, OptionsBar, Logout, HideOptions } from "./style";
 
 export default function Header(){
-    const patchLogoutURL = `http://localhost:5000/sign-out`;
-    const {image, token} = useContext(UserContext);
+    const patchLogoutURL = "https://linkr-mggg.herokuapp.com/";
+    const {userData} = useContext(UserContext);
+    //const {image, token} = userData;
+
     const [arrow, setArrow] = useState("down")
     const [optionsBar, setOptionsBar] = useState(false);
     const navigate = useNavigate();
 
     const config = {
         headers: {
-            authorization: `Bearer ${token}`
+            authorization: `Bearer ${localStorage.getItem('token')}`
         }
     }
 
@@ -28,7 +30,7 @@ export default function Header(){
         setArrow("down");
         setOptionsBar(false);
         try{
-            const {data} = await axios.patch(patchLogoutURL, {}, config);
+            await axios.patch(patchLogoutURL, {}, config);
             navigate("/");
         }catch(error){
             Swal.fire({
@@ -43,9 +45,10 @@ export default function Header(){
     return(
         <HeaderContent>
             <h1>linkr</h1>
+            <SearchBar />
             <Options onClick={() => openCloseOptionsBar()}>
                 <ion-icon name={`chevron-${arrow}-outline`}></ion-icon>
-                <img src={image}></img>
+                <img src={userData.image} alt={userData.name}></img>
             </Options>
             <OptionsBar optionsBar={optionsBar}>
                 <Logout onClick={() => logout()}>Logout</Logout>

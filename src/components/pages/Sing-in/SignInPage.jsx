@@ -7,7 +7,7 @@ import { Main } from "./style";
 import UserContext from "../../../contexts/UserContext";
 
 export default function SignInPage(){
-    const postLoginURL = "http://localhost:5000/sign-in"; 
+    const postLoginURL = "https://linkr-mggg.herokuapp.com/sign-in"; 
     const {setUserData} = useContext(UserContext);
     const [loginData, setLoginData] = useState({email: "", password: ""});
     const [disabled, setDisabled] = useState(false);
@@ -18,8 +18,9 @@ export default function SignInPage(){
         setDisabled(true);
         try{
             const {data} = await axios.post(postLoginURL, loginData);
-            const {name, image, token} = data;
-            setUserData({name, image, token});
+            const {id, name, image, token} = data;
+            setUserData({id, name, image, token});
+            localStorage.setItem('token', token);
             navigate("/timeline");
         }catch(error){
             Swal.fire({
