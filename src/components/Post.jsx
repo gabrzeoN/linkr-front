@@ -185,7 +185,7 @@ const DivIcon = styled.div`
 
     position: absolute;
     top:22px;
-    right: 226px;
+    right: 218px;
 
     @media only screen and (min-width: 600px) {
         display:flex;
@@ -273,8 +273,10 @@ const EditMessage = styled.input`
 `;
 
 const PostMessage = styled.div`
-    width: 502px;
+    width: 275px;
     height: 45px;
+
+    margin-right: 220px;
     
     margin-top: -15px;
     margin-left: 266px;
@@ -284,7 +286,7 @@ const PostMessage = styled.div`
     @media only screen and (min-width: 600px) {
         width: 502px;
         height: 45px;
-
+        
         margin-top: -15px;
         margin-left: 86px;
 
