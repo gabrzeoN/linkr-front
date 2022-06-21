@@ -1,54 +1,53 @@
-import ReactHashtag from "@mdnm/react-hashtag";
+import axios from "axios";
+import Loading from "../../../assets/Loading"
 import { useState, useEffect } from "react";
-import Loading from "../../../assets/Loading";
-import UserContext from "../../../contexts/UserContext"
-import api from "../../../services/api";
-import { TrendingBox, Title, Separator } from "./style";
+import { Link } from "react-router-dom";
 
-export default function Trending() {
-  const { user, hashtagRedirect } = UserContext();
-  const [trending, setTrending] = useState();
-  const [loading, setLoading] = useState();
-  const [intervalKey, setIntervalKey] = useState();
+import { Box, Tags } from "./style";
 
-  function getTrending() {
-    const limit = 10;
-    setLoading(true);
-    intervalKey && clearInterval(intervalKey);
-    api.getTrendingHashtags(limit, user?.token).then(res => {
-      setTrending(res.data);
-      setLoading(false);
-    }).catch(error => {
-      setLoading(false);
-      console.log(error);
-    });
-  }
+export default function TrendingTags() {
+  const token = localStorage.getItem("token");
+  const [trendings, setTrendings] = useState();
 
   useEffect(() => {
-    getTrending();
-    schedulesHashtagRerender();
+    (async () => {
+      try {
+        axios
+          .get(`https://linkr-mggg.herokuapp.com/trending`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((response) => {
+            const { data } = response;
+            setTrendings(data);
+          })
+          .catch((e) => console.log(e));
+      } catch (e) {
+        alert("Erro ao receber tags em trending");
+        console.log(e.response);
+      }
+    })();
   }, []);
 
-  function schedulesHashtagRerender() {
-    const interval = setInterval(getTrending, 10 * 60000);
-    setIntervalKey(interval);
-  }
-
   return (
-    <TrendingBox>
-      <Title>trending</Title>
-      <Separator />
-      {
-        loading
-          ? <Loading />
-          : trending?.length === 0
-            ? <span>there are no trending hashtags from the last 24 hours</span>
-            : trending?.map(el => (
-              <ReactHashtag key={el.hashtag} onHashtagClick={value => hashtagRedirect(value)}>
-                {`#${el.hashtag}`}
-              </ReactHashtag>
-            ))
-      }
-    </TrendingBox>
-  )
+    <>
+      <Box>
+        <h1>trending</h1>
+        <Tags>
+          {trendings ? (
+            trendings.map((trending) => {
+              const { hashtag } = trending;
+              return (
+                <Link to={`/hashtag/${hashtag}`} key={hashtag}>
+                  <p># {hashtag}</p>
+                </Link>
+              );
+            })
+          ) : (
+            <Loading />
+          )}
+        </Tags>
+      </Box>
+    </>
+  );
 }
+

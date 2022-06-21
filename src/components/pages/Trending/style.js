@@ -1,61 +1,50 @@
 import styled from "styled-components";
 
-const TrendingBox = styled.div`
-  width: 90%;
-  
+const Box = styled.div`
+  width: 301px;
+  height: 406px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-radius: 16px;
-  
   background-color: #171717;
-  color: #fff;
+  border-radius: 16px;
   position: sticky;
   top: 215px;
-  left: 60vw;
-  &> span {
-    width: 100%;
-    text-align: left;
-    padding: 8px 16px;
-    font-family: 'Lato';
-    font-style: normal;
+  h1 {
+    font-size: 25px;
     font-weight: 700;
+    font-family: "Oswald", sans-serif;
+    font-style: normal;
+    line-height: 25.01px;
+    color: #ffffff;
+    border-radius: 16px;
+    margin-top: 15px;
+    margin-bottom: 14px;
+    margin-left: 16px;
+  }
+`;
+
+const Tags = styled.div`
+  width: 300px;
+  height: 335px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #171717;
+  border-top: solid 1px #484848;
+  padding: 15px 16px;
+  p {
     font-size: 19px;
-    line-height: 23px;
-    cursor: pointer;
+    font-weight: 700;
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    line-height: 0px;
+    letter-spacing: 5%;
+    color: #fff;
+    margin: 15px 0px;
   }
-  &> span:first-of-type {
-    margin-top: 18px;
-  }
-  &> span:last-of-type {
-    margin-bottom: 18px;
-  }
-  @media (min-width: 912px) {
-        width: 72%
-  }
-`
-
-const Title = styled.p`
-  width: 100%;
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 27px;
-  line-height: 40px;
-  text-align: left;
-  padding: 12px 16px;
- 
-  color: #fff;
-`
-
-const Separator = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: #484848;
-`
+`;
 
 export {
-  TrendingBox,
-  Title,
-  Separator
+  Box,
+  Tags,
 }
