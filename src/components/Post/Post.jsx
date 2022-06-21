@@ -1,0 +1,141 @@
+import { SinglePost, PostAuth, UserPic, UserName, DivIcon, PostInfo, EditMessage, PostMessage, PostLikes, PostMetadata, MetaTitle, MetaDescription, MetaImage, MetaLink, Div } from "./style.jsx";
+
+import { useContext, useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
+import UserContext from "../../contexts/UserContext";
+//import Like from "./Like";
+import Swal from "sweetalert2";
+import axios from "axios";
+import IdentifyHashtag from "../IdentifyHashtag";
+
+export default function Post ({ name, image, url, message, metadata, userId, id , getPosts}){
+    const {userData, user, setUser} = useContext(UserContext); 
+    const [editPost, setEditPost] = useState(false);
+    const [disabled, setDisabled] = useState(false);
+    const [inputValue, setInputValue] = useState(message);
+    const previousInputValue = useRef(null);
+    const navigate = useNavigate();
+
+    const config = {headers: {Authorization: `Bearer ${userData.token}` }};
+    // const URL = "https://linkr-mggg.herokuapp.com/";
+    const URL_Host = "http://localhost:5000/"
+
+    useEffect(() => {
+        previousInputValue.current = inputValue;
+    }, [inputValue]);
+
+    function updateMessage(e){
+        if(e.keyCode ===  13){
+            e.preventDefault();
+            setDisabled(true);
+            updatePost(inputValue);
+        } else if(e.keyCode === 27){
+            e.preventDefault();
+            setInputValue(message);
+            setEditPost(false);
+        }        
+    }
+
+    function updatePost(inputValue){
+        const newPost = { postId: id, userId: userId, newMessage:inputValue }
+        const promise = axios.put(URL_Host, newPost, config);
+        promise.then((res) => {
+            setInputValue(newPost.newMessage);
+            setEditPost(false);
+            getPosts();            
+        });
+        promise.catch((err) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Não foi possível salvar as alterações!"
+            })
+            setDisabled(false);
+        });
+    }
+
+    function deletePost(id){
+        const postId = id;
+        Swal.fire({
+            title: 'Are you sure you want to delete this post?',
+            color: '#ffffff',
+            background: '#333333',
+            confirmButtonColor: '#1877F2',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            showCancelButton: true,
+            cancelButtonText: 'No, go back!',
+            reverseButtons: true,
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return axios.delete(`http://localhost:5000/${postId}`, config )
+                        .then(response => 
+                            Swal.isLoading())
+                        .catch(error => {Swal.showValidationMessage(`Request failed: ${error}`)})
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title:'Deleted!', 
+                        text:'Your post has been deleted.',
+                        icon:'success', 
+                        background:'#333333',
+                        color:'#fff'
+                    });
+                    getPosts();
+                }})
+    }
+    
+    return (
+        <>
+            <SinglePost>
+                <PostAuth>
+                    <UserPic src={image} alt={'user-image'} />
+                    <PostLikes>
+                        {/* <Like postId={id} userId={userId}></Like> */}
+                    </PostLikes>
+                    
+                    {userId === userData.id ? 
+                    <DivIcon>
+                        <FaPencilAlt onClick={() => setEditPost(!editPost)} color="#ffffff" size={16} />
+                        <FaTrashAlt onClick={() => deletePost(id)} color="#ffffff" size={16}/>
+                    </DivIcon> : <></>}
+                </PostAuth>
+            
+                <PostInfo>
+                    <UserName onClick={() => {setUser({...user, id:userId});
+                        navigate(`/user/${userId}`)}}
+                        >
+                        {name}
+                    </UserName>
+                    {editPost ? 
+                    <EditMessage autoFocus ref={previousInputValue}
+                                type="text" 
+                                value={inputValue} 
+                                onChange={e => setInputValue(e.target.value)}
+                                onKeyDown={(e) => updateMessage(e)}
+                                disabled={disabled}
+                    />
+                    :
+                    <PostMessage>
+                        <IdentifyHashtag>{message}</IdentifyHashtag>
+                    </PostMessage>
+                    }
+                    
+                    <PostMetadata target="_blank" rel="noreferrer" href={url}>
+                        <Div>
+                            <MetaTitle>{metadata.title}</MetaTitle>
+                            <MetaDescription>{metadata.description}</MetaDescription>
+                            <MetaLink>{url}</MetaLink>
+                        </Div>
+                        <MetaImage src={metadata.image}  alt={'article-image'} />
+
+                    </PostMetadata>
+                </PostInfo>
+            </SinglePost>
+        </>
+        
+    );
+}
