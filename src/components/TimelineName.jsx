@@ -20,4 +20,9 @@ const TimelineName = styled.div`
     font-weight: bold;
     color: white;
 
+    @media only screen and (max-width: 600px) {
+        margin-top: 150px;
+        padding-right: 200px;
+    }
+
 `;

@@ -252,12 +252,24 @@ const PostInfo = styled.div`
 const EditMessage = styled.input`
     width: 503px;
     height: 44px;
-
+    margin-bottom: 10px;
+    
     border-radius:7px;
     border:none;
     background-color:#ffffff;
-    margin-top: -15px;
+    margin-top: -20px;
     margin-left: 86px;
+
+    @media only screen and (max-width: 600px) {
+        width: 278px;
+        height: 39px;
+        margin-bottom: 10px;
+        margin-top: -20px;
+        margin-left: 265px;
+
+        z-index: 1;
+    }
+
 `;
 
 const PostMessage = styled.div`
