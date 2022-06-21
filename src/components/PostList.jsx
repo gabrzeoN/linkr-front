@@ -1,7 +1,7 @@
 //import { useState } from "react";
 import styled from "styled-components";
 import Header from "./Header";
-import Post from "./Post";
+import Post from "./Post/Post";
 
 export default function PostList ({posts, getPosts, loading}) {
     console.log("aaaa", posts);
