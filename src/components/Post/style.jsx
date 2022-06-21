@@ -46,8 +46,12 @@ export const DivIcon = styled.div`
     gap: 12px;
 
     position: absolute;
-    top:22px;
-    right: 21px;
+    top:10px;
+    right: 10px;
+    @media only screen and (min-width: 600px) {
+        top: 22px;
+        right: 22px;
+    }
 `;
 
 export const UserPic = styled.img`
@@ -55,6 +59,7 @@ export const UserPic = styled.img`
     height: 40px;
 
     border-radius: 50%;
+    object-fit:cover;
     @media only screen and (min-width: 600px) {
         width: 50px;
         height: 50px;
@@ -90,7 +95,7 @@ export const UserName = styled.h1`
 `;
 
 export const EditMessage = styled.input`
-    width: 503px;
+    width: 100%;
     height: 44px;
 
     border-radius:7px;
@@ -98,7 +103,6 @@ export const EditMessage = styled.input`
     background-color:#ffffff;
 
     @media only screen and (max-width: 600px) {
-        width:278px;
         height: 30px;
     }
 `;
@@ -223,6 +227,7 @@ export const MetaImage = styled.img`
 
     border-left: 1px solid #303030;
     border-radius: 0px 11px 11px 0px;
+    object-fit: cover;
 
     @media only screen and (min-width: 600px) {
         width: 153.44px;

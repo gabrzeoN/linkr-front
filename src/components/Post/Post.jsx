@@ -18,8 +18,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
     const navigate = useNavigate();
 
     const config = {headers: {Authorization: `Bearer ${userData.token}` }};
-    // const URL = "https://linkr-mggg.herokuapp.com/";
-    const URL_Host = "http://localhost:5000/"
+    const URL = "https://linkr-mggg.herokuapp.com/posts";
 
     useEffect(() => {
         previousInputValue.current = inputValue;
@@ -39,7 +38,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
 
     function updatePost(inputValue){
         const newPost = { postId: id, userId: userId, newMessage:inputValue }
-        const promise = axios.put(URL_Host, newPost, config);
+        const promise = axios.put(URL, newPost, config);
         promise.then((res) => {
             setInputValue(newPost.newMessage);
             setEditPost(false);
@@ -69,7 +68,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
             reverseButtons: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.delete(`http://localhost:5000/${postId}`, config )
+                return axios.delete(`https://linkr-mggg.herokuapp.com/posts/${postId}`, config )
                         .then(response => 
                             Swal.isLoading())
                         .catch(error => {Swal.showValidationMessage(`Request failed: ${error}`)})
