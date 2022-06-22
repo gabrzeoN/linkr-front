@@ -62,3 +62,76 @@ export const TimelineBody = styled.div`
         align-items: center;
     }
 `;
+
+export const ContainerUserData= styled.div`
+    width:100%;
+    height:146px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-left: 200px;
+
+    @media only screen and (max-width: 600px) {
+        padding-left:17px;
+        padding-right: 17px;
+    }
+`;
+export const Div = styled.div`
+    height:146px;
+    gap:18px;
+
+    display:flex;
+    align-items:center;
+`;
+
+export const Picture = styled.img`
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+    object-fit:cover;
+
+    @media only screen and (max-width: 600px) {
+        display:none;
+    }
+
+`;
+
+export const Title = styled.h1`
+    height: 49px;
+
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 33px;
+
+    color: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+
+    @media only screen and (min-width: 600px) {
+        height: 64px;
+        font-size: 43px;
+    
+    }
+`;
+
+export const Button = styled.button`
+    width: 112px;
+    height: 31px;
+
+    background-color: #1877F2;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+
+    @media only screen and (max-width: 600px) {
+        width: 90px;
+        height: 31px;
+
+        margin-top: 5px;
+    }
+`;

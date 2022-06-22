@@ -28,8 +28,9 @@ export default function Timeline() {
             setPosts(data);
 
         })
-        promise.catch(() => {
-            alert('An error occured while trying to fetch the posts, please refresh the page');
+        promise.catch((error) => {
+            console.log(error);
+            //alert('An error occured while trying to fetch the posts, please refresh the page');
         });
     }
 

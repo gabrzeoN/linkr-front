@@ -106,7 +106,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                 </PostAuth>
             
                 <PostInfo>
-                    <UserName onClick={() => {setUser({...user, id:userId});
+                    <UserName onClick={() => {setUser({...user, id:userId, name:name, image: image});
                         navigate(`/user/${userId}`)}}
                         >
                         {name}
