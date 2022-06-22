@@ -12,6 +12,7 @@ import { useState, useEffect, useContext} from "react"
 import api from "../../services/api"
 import UserContext from "../../contexts/UserContext.jsx"
 import Loading from "../../assets/Loading"
+import HeaderComment from "../HeaderComment"
 
 function Comments({ postId, userId }) {
 
@@ -59,10 +60,7 @@ function Comments({ postId, userId }) {
                         <CommentContent>
                             <img src={comment.image} />
                             <SeparateMessages>
-                                <User>
-                                <div className="username">{comment.username}</div>
-                                    comment={comment}
-                                </User>
+                                <HeaderComment comment={comment} />
                                 <div className="coment">{comment.text}</div>
                             </SeparateMessages>
                         </CommentContent>
