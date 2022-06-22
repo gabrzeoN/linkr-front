@@ -15,9 +15,6 @@ import Loading from "../../assets/Loading"
 import HeaderComment from "../HeaderComment"
 
 function Comments({ postId, userId }) {
-
-
-
     const { user } = useContext(UserContext)
     const [text, setText] = useState()
     const [comments, setComments] = useState([])
