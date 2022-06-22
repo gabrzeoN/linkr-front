@@ -8,7 +8,7 @@ export const SinglePost = styled.div`
     justify-content: center;
     padding: 15px 15px 15px 15px;
     gap:18px;
-
+    z-index:1;
     background-color: #171717;
 
     font-family: 'Lato';
