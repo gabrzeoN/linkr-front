@@ -3,6 +3,7 @@ import UserContext from "../../../contexts/UserContext";
 import { useState, useContext } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import api from "../../../services/api";
 
 export default function PublishCard({getPosts}){
     const token = localStorage.getItem('token');
@@ -16,7 +17,7 @@ export default function PublishCard({getPosts}){
         e.preventDefault();
         setDisabled(true);
 
-        const URL = "https://linkr-mggg.herokuapp.com/posts";
+        const URL = `${api.BASE_URL}/posts`;
         const promise = axios.post(URL, post, config);
         promise.then(() => {
             setDisabled(false);

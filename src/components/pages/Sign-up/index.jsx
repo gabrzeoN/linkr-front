@@ -1,7 +1,7 @@
-import { useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
-import Loading from "../../../assets/Loading"
-import api from "../../../services/api"
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import Loading from "../../../assets/Loading";
+import api from "../../../services/api";
 import Swal from 'sweetalert2';
 import { Main, StyledButton, CenterLoader } from "../Sing-in/style";
 

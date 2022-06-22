@@ -1,13 +1,14 @@
 import { SinglePost, PostAuth, UserPic, UserName, DivIcon, PostInfo, EditMessage, PostMessage, PostLikes, PostMetadata, MetaTitle, MetaDescription, MetaImage, MetaLink, Div } from "./style.jsx";
+import UserContext from "../../contexts/UserContext";
+import IdentifyHashtag from "../IdentifyHashtag";
+import Like from "./../Like/index.jsx";
 
 import { useContext, useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
-import UserContext from "../../contexts/UserContext";
-import Like from "./../Like/index.jsx";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
-import IdentifyHashtag from "../IdentifyHashtag";
+import api from "../../services/api.js";
 
 export default function Post ({ name, image, url, message, metadata, userId, id , getPosts}){
     const {userData, user, setUser} = useContext(UserContext); 
@@ -18,7 +19,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
     const navigate = useNavigate();
 
     const config = {headers: {Authorization: `Bearer ${userData.token}` }};
-    const URL = "https://linkr-mggg.herokuapp.com/posts";
+    const URL = `${api.BASE_URL}/posts`;
 
     useEffect(() => {
         previousInputValue.current = inputValue;
@@ -42,6 +43,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
         promise.then((res) => {
             setInputValue(newPost.newMessage);
             setEditPost(false);
+            setInputValue(message);
             getPosts();            
         });
         promise.catch((err) => {
@@ -68,7 +70,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
             reverseButtons: true,
             showLoaderOnConfirm: true,
             preConfirm: () => {
-                return axios.delete(`https://linkr-mggg.herokuapp.com/posts/${postId}`, config )
+                return axios.delete(`${api.BASE_URL}/posts/${postId}`, config )
                         .then(response => 
                             Swal.isLoading())
                         .catch(error => {Swal.showValidationMessage(`Request failed: ${error}`)})

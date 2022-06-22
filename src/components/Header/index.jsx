@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar";
 import UserContext from "../../contexts/UserContext";
 import { HeaderContent, Options, OptionsBar, Logout, HideOptions } from "./style";
+import api from "../../services/api";
 
 export default function Header(){
-    const patchLogoutURL = "https://linkr-mggg.herokuapp.com/sign-out";
+    const patchLogoutURL = ` ${api.BASE_URL}/sign-out`;
     const {userData} = useContext(UserContext);
     //const {image, token} = userData;
 
