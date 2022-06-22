@@ -1,15 +1,15 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import ReactTooltip from 'react-tooltip';
-
 import { useState, useContext, useEffect } from "react";
 
+import api from "../../services/api";
 import UserContext from "../../contexts/UserContext";
 import { LikedContent, NotLikedContent } from "./style";
 
 export default function Like({postId}){
-    const postLikeURL = `https://linkr-mggg.herokuapp.com/likes/${postId}`;
-    const getLikeURL = `https://linkr-mggg.herokuapp.com/likes/${postId}`;
+    const postLikeURL = `${api.BASE_URL}/likes/${postId}`;
+    const getLikeURL = `${api.BASE_URL}/likes/${postId}`;
     const {userData} = useContext(UserContext);
     const {token} = userData;
     const [liked, setLiked] = useState(null);
