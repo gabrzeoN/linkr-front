@@ -15,4 +15,4 @@ export default function useLocalStorage( key, initialValue ) {
 }
 
 // !COMO USAR! :(para fazer logout é só usar: setUser(null))
-// const [user, setUser] = useLocalStorage('user', null)  
+// const [user, setUser] = useLocalStorage('user', null)

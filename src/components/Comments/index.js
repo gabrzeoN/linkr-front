@@ -16,7 +16,7 @@ import HeaderComment from "../HeaderComment"
 
 function Comments({ postId, userId }) {
     const { userData } = useContext(UserContext)
-    const [text, setText] = useState()
+    const [text, setText] = useState("")
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
@@ -27,6 +27,7 @@ function Comments({ postId, userId }) {
     function handlePostComment() {
         api.createComment(userData?.token, text, postId, userId).then(() => {
             setText("")
+            getComments();
         }).catch((error) => {
             console.log(error)
         })
@@ -34,8 +35,7 @@ function Comments({ postId, userId }) {
 
     function getComments() {
         setIsLoading(true)
-        api.getComments(userData?.token, postId, userId).then((res) => {
-            console.log("chegou comentario")
+        api.getComments(userData?.token, postId).then((res) => {
             setComments(res.data);
             setIsLoading(false)
         }).catch((error) => {
