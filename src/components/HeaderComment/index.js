@@ -13,11 +13,7 @@ export default function HeaderComment({ comment }) {
         <User>
             <div className="username">{comment.username}</div>
             <div className="follow">
-                {comment.userId === userData?.id ?
-                    "• post's author"
-                    : 
-                    "• following"
-                }
+                {"• post's author" }
             </div>
         </User>
     )
