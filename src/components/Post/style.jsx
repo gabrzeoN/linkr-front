@@ -162,8 +162,10 @@ export const Div = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 4px;
-    
+    gap: 5px;
+    @media only screen and (min-width: 600px) {
+        width: 305px;
+    }
 `;
 
 export const MetaTitle = styled.div`

@@ -7,10 +7,11 @@ export default function PostList ({posts, getPosts, loading}) {
     console.log("aaaa", posts);
 
     function showPosts () {   
-        if (posts.length !== 0) {
+        if (posts?.length !== 0) {
             console.log("passei", posts);
-            return posts.map((post, i)=> {
+            return posts?.map((post, i)=> {
                 const { userId, name, image, id , url, metadata, message } = post;
+                
                 return (
                     <>
                         <Post  key={i} userId={userId} name={name} image={image} id={id} url={url} 
