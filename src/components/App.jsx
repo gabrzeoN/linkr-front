@@ -22,7 +22,7 @@ export default function App(){
                         <Route path="/sign-up" element={<SignUp/>} />
                         <Route path="/timeline" element={<Timeline/>} />
                         <Route path='/hashtag/:hashtag' element={<TagPage />} />
-                        <Route path="/user/:id" element={<UserPage/>} />
+                        <Route path="/user/:userId" element={<UserPage/>} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>

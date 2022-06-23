@@ -23,7 +23,7 @@ export default function Timeline() {
         setLoading(true);
         promise.then(response => {
             setLoading(false);
-            console.log(response);
+            console.log("timeline", response.data);
             const { data } = response;
             setPosts(data);
 

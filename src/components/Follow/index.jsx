@@ -12,6 +12,7 @@ export default function Follow({userId}){
     const {userData} = useContext(UserContext);
     const {token} = userData;
     const [follow, setFollow] = useState(null);
+    const [showButton, setShowButton] = useState(null);
     const [disabled, setDisabled] = useState(false);
 
     const config = {
@@ -23,7 +24,8 @@ export default function Follow({userId}){
     async function checkFollowStatus(){
         try{
             const {data} = await axios.get(checkFollowStatusURL, config);
-            const { followedByMe } = data;
+            const { followedByMe, isMe } = data;
+            setShowButton(!isMe);
             setFollow(followedByMe);
         }catch(error){
             Swal.fire({icon: 'error', title: 'Oops...', text: error.response.data});
@@ -50,15 +52,17 @@ export default function Follow({userId}){
 
     return(
         <>
-            {follow ?
-                    <FollowContent onClick={() => followUnfollow()} disabled={disabled}>
-                        <p>Follow</p>
-                    </FollowContent>
+            {showButton ?
+                    !follow ?
+                        <FollowContent onClick={() => followUnfollow()} disabled={disabled}>
+                            <p>Follow</p>
+                        </FollowContent>
+                    :
+                        <UnfollowContent onClick={() => followUnfollow()} disabled={disabled}>
+                            <p>Unfollow</p>
+                        </UnfollowContent>
                 :
-                    <UnfollowContent onClick={() => followUnfollow()} disabled={disabled}>
-                        <p>Unfollow</p>
-                    </UnfollowContent>
-
+                <></>
             }
         </>
     );
