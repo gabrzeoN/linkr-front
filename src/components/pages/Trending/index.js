@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { Box, Tags } from "./style";
+import api from "../../../services/api";
 
 export default function TrendingTags() {
   const token = localStorage.getItem("token");
@@ -13,7 +14,7 @@ export default function TrendingTags() {
     (async () => {
       try {
         axios
-          .get(`https://linkr-mggg.herokuapp.com/trending`, {
+          .get(`${api.BASE_URL}/trending`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((response) => {

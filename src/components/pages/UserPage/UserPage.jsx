@@ -6,6 +6,7 @@ import PostList from "../../PostList";
 import Trending from "./../Trending/index.js";
 import api from "./../../../services/api.js";
 import { useParams } from "react-router-dom";
+import Follow from "../../Follow";
 
 export default function UserPage(){
     const { userId } = useParams();
@@ -50,7 +51,7 @@ export default function UserPage(){
                                 <Picture src={dataUser.image}  alt={dataUser.name}/>
                                 <Title>{dataUser.name}'s posts</Title>
                             </Div>
-                            <Button id={userId}>Follow</Button>
+                            <Follow userId={userId}></Follow>
                         </ContainerUserData>
                         {posts?.length === 0 ? 
                         <Text>{dataUser.name} has no posts yet...</Text> 
