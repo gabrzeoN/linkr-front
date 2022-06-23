@@ -13,7 +13,6 @@ const LeftWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    background-color: #333333;
 
     @media (max-width: 600px) {
         width: 100%;
@@ -50,16 +49,17 @@ const TimelineBody = styled.div`
 `;
 
 const TitleContainer = styled.p`
-    width: 90%;
-    text-align: left;
-    margin-top: 53px;  
-    margin-bottom: 43px;
-    word-break: break-all;
+    margin-top: 53px; 
+    margin-bottom: 26px;
+    width: fit-content;
     font-size: 43px;
+    font-family: Oswald, sans-serif;
+    font-weight: bold;
+    color: white;
+    text-align: left;
+    word-break: break-all;
     font-weight: 700;
     line-height: 49px;
-    color: #FFF;
-    font-family: "Oswald", sans-serif;
     @media (max-width: 610px) {
         font-size: 33px;
         margin: 19px 0;
@@ -68,6 +68,7 @@ const TitleContainer = styled.p`
     @media (min-width: 912px) {
         width: 72%;
     }
+    
 `
 
 export{

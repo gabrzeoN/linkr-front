@@ -11,12 +11,12 @@ async function signUp(formData) {
     const promise = await axios.post(`${BASE_URL}/sign-up`, formData)
     return promise;
 }
-async function createComment(token, text, postId, userId) {
+async function createComment(token, text, postId) {
     const auth = createHeaders(token)
-    const body = { text, postId, userId }
+    const body = { text, postId }
 
     const promise = await axios.post(`${BASE_URL}/comments`, body, auth)
-    return promise
+    return promise;
 }
 async function getComments(token, postId) {
     const auth = createHeaders(token);
