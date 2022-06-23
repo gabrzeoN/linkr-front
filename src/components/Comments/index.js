@@ -15,7 +15,7 @@ import Loading from "../../assets/Loading"
 import HeaderComment from "../HeaderComment"
 
 function Comments({ postId, userId }) {
-    const { user } = useContext(UserContext)
+    const { userData } = useContext(UserContext)
     const [text, setText] = useState()
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -25,9 +25,8 @@ function Comments({ postId, userId }) {
     }
 
     function handlePostComment() {
-        api.createComment(user?.token, text, postId, user?.id).then(() => {
+        api.createComment(userData?.token, text, postId, userId).then(() => {
             setText("")
-            window.location.reload()
         }).catch((error) => {
             console.log(error)
         })
@@ -35,7 +34,8 @@ function Comments({ postId, userId }) {
 
     function getComments() {
         setIsLoading(true)
-        api.getComments(user?.token, postId, user?.id).then((res) => {
+        api.getComments(userData?.token, postId, userId).then((res) => {
+            console.log("chegou comentario")
             setComments(res.data);
             setIsLoading(false)
         }).catch((error) => {
@@ -65,7 +65,7 @@ function Comments({ postId, userId }) {
                 )
             }
             <InputCommentContent>
-                <img src={user?.image} />
+                <img src={userData?.image} />
                 <InputComment
                     id="userComment"
                     name="userComment"

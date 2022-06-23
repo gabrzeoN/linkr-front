@@ -42,7 +42,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
     }
 
     function counterComments() {
-        api.commentsCounter(id, user?.token)
+        api.commentsCounter(id, userData?.token)
             .then((res) => {
                 setTotalComments(res.data)
             }).catch((error) => {

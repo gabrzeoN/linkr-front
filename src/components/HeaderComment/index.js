@@ -5,7 +5,7 @@ import {
 } from "./style"
 
 export default function HeaderComment({ comment }) {
-    const { user } = useContext(UserContext);
+    const { userData } = useContext(UserContext);
     
     //fazer a verificação para ver se está seguindo
 
@@ -13,7 +13,7 @@ export default function HeaderComment({ comment }) {
         <User>
             <div className="username">{comment.username}</div>
             <div className="follow">
-                {comment.userId === user?.id ?
+                {comment.userId === userData?.id ?
                     "• post's author"
                     : 
                     "• following"

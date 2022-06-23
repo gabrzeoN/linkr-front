@@ -16,7 +16,7 @@ async function createComment(token, text, postId, userId) {
     const body = { text, postId, userId }
 
     const promise = await axios.post(`${BASE_URL}/comments`, body, auth)
-    return promise
+    return promise;
 }
 async function getComments(token, postId) {
     const auth = createHeaders(token);
