@@ -36,7 +36,7 @@ function Comments({ postId }) {
     function getComments() {
         setIsLoading(true)
         api.getComments(userData?.token, postId).then((res) => {
-            console.log("RESPOSTA COMMENTS", res.data)
+            console.log("RESPOSTA COMMENTS", res)
             setComments(res.data);
             setIsLoading(false)
         }).catch((error) => {
