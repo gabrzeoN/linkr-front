@@ -12,6 +12,7 @@ export default function Follow({userId}){
     const {userData} = useContext(UserContext);
     const {token} = userData;
     const [follow, setFollow] = useState(null);
+    const [disabled, setDisabled] = useState(false);
 
     const config = {
         headers: {
@@ -31,6 +32,7 @@ export default function Follow({userId}){
     }
 
     async function followUnfollow(){
+        setDisabled(true);
         try{
             const {data} = await axios.post(followUnfollowURL, {}, config);
             const { followedByMe } = data;
@@ -38,6 +40,7 @@ export default function Follow({userId}){
         }catch(error){
             Swal.fire({icon: 'error', title: 'Oops...', text: error.response.data});
         }
+        setDisabled(false);
         return;
     }
 
@@ -48,11 +51,11 @@ export default function Follow({userId}){
     return(
         <>
             {follow ?
-                    <FollowContent onClick={() => followUnfollow()}>
+                    <FollowContent onClick={() => followUnfollow()} disabled={disabled}>
                         <p>Follow</p>
                     </FollowContent>
                 :
-                    <UnfollowContent onClick={() => followUnfollow()}>
+                    <UnfollowContent onClick={() => followUnfollow()} disabled={disabled}>
                         <p>Unfollow</p>
                     </UnfollowContent>
 

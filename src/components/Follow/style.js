@@ -15,6 +15,11 @@ export const FollowContent = styled.button`
         line-height: 17px;
         color: #FFFFFF;
     }
+    @media only screen and (max-width: 600px) {
+        width: 90px;
+        height: 31px;
+        margin-top: 5px;
+    }
 `;
 
 export const UnfollowContent = styled.button`
@@ -31,5 +36,10 @@ export const UnfollowContent = styled.button`
         font-size: 14px;
         line-height: 17px;
         color: #1877F2;
+    }
+    @media only screen and (max-width: 600px) {
+        width: 90px;
+        height: 31px;
+        margin-top: 5px;
     }
 `;
