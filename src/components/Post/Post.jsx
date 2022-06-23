@@ -2,6 +2,8 @@ import { SinglePost, PostAuth, UserPic, UserName, DivIcon, PostInfo, EditMessage
 import UserContext from "../../contexts/UserContext";
 import IdentifyHashtag from "../IdentifyHashtag";
 import Like from "./../Like/index.jsx";
+import PostComment from "../PostComments";
+import Comments from "../Comments";
 
 import { useContext, useState, useEffect, useRef } from "react";
 import {FaPencilAlt, FaTrashAlt} from "react-icons/fa";
@@ -15,6 +17,8 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
     const [editPost, setEditPost] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [inputValue, setInputValue] = useState(message);
+    const [comments, setComments] = useState(false);
+    const [totalComments, setTotalComments] = useState(0)
     const previousInputValue = useRef(null);
     const navigate = useNavigate();
 
@@ -36,6 +40,19 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
             setEditPost(false);
         }        
     }
+
+    function counterComments() {
+        api.commentsCounter(id, user?.token)
+            .then((res) => {
+                setTotalComments(res.data)
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
+
+    useEffect(() => {
+        counterComments()
+    }, [])
 
     function updatePost(inputValue){
         const newPost = { postId: id, userId: userId, newMessage:inputValue }
@@ -97,6 +114,9 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                     <PostLikes>
                         <Like postId={id} userId={userId}></Like> 
                     </PostLikes>
+                    <PostComment setComments={setComments} comments={comments} 
+                    postId={id} userId={userId} token={user?.token} 
+                    totalComments={totalComments} />
                     
                     {userId === userData.id ? 
                     <DivIcon>
@@ -106,7 +126,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                 </PostAuth>
             
                 <PostInfo>
-                    <UserName onClick={() => {setUser({...user, id:userId});
+                    <UserName onClick={() => {setUser({...user, id:userId, name:name, image: image});
                         navigate(`/user/${userId}`)}}
                         >
                         {name}
@@ -136,6 +156,10 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                     </PostMetadata>
                 </PostInfo>
             </SinglePost>
+            {
+                comments &&
+                <Comments postId={id} userId={userId} />
+            }
         </>
         
     );
