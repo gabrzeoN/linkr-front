@@ -135,3 +135,13 @@ export const Button = styled.button`
         margin-top: 5px;
     }
 `;
+
+export const Text = styled.h1`
+    width:100%;
+    font-family:'Lato';
+    font-weight:400;
+    font-size:25px;
+    line-height: 64px;
+    text-align: center;
+    color: #ffffff;
+`;
