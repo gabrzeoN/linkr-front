@@ -7,6 +7,7 @@ import Loading from "../../../assets/Loading.js";
 import Header from "../../Header/index.jsx";
 import Trending from "../Trending/index.js"
 import PostList from "../../PostList.jsx"
+import api from "../../../services/api.js";
 
 export default function TagPage() {
   const token = localStorage.getItem("token");
@@ -15,7 +16,7 @@ export default function TagPage() {
   const { hashtag } = useParams();
 
   function getTagPosts() {
-    const promise = axios.get(`https://linkr-mggg.herokuapp.com/hashtag/${hashtag}`, {
+    const promise = axios.get(`${api.BASE_URL}/hashtag/${hashtag}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     setLoading(true);

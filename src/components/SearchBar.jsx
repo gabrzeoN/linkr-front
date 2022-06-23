@@ -4,6 +4,7 @@ import Profile from "./Profile";
 import axios from "axios";
 import styled from "styled-components";
 import searchIcon from "../assets/img/search.png";
+import api from "../services/api";
 
 export default function SearchBar () {
 
@@ -16,7 +17,7 @@ export default function SearchBar () {
     function profileSearch () {
         if(searchResult.length >= 3) {
             console.log(searchResult);
-            const promise = axios.get(`https://linkr-mggg.herokuapp.com/search?name=${searchResult}`);
+            const promise = axios.get(`${api.BASE_URL}/search?name=${searchResult}`);
             promise.then (response => {
                 const {data} = response;
                 console.log(data[0].name);

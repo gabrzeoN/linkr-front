@@ -3,11 +3,11 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { Main } from "./style";
-
+import api from "../../../services/api";
 import UserContext from "../../../contexts/UserContext";
 
 export default function SignInPage(){
-    const postLoginURL = "https://linkr-mggg.herokuapp.com/sign-in"; 
+    const postLoginURL = `${api.BASE_URL}/sign-in`; 
     const {setUserData} = useContext(UserContext);
     const [loginData, setLoginData] = useState({email: "", password: ""});
     const [disabled, setDisabled] = useState(false);

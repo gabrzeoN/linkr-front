@@ -13,12 +13,12 @@ import axios from "axios";
 import api from "../../services/api.js";
 
 export default function Post ({ name, image, url, message, metadata, userId, id , getPosts}){
-    const {userData, user, setUser} = useContext(UserContext); 
+    const { userData } = useContext(UserContext); 
     const [editPost, setEditPost] = useState(false);
     const [disabled, setDisabled] = useState(false);
-    const [inputValue, setInputValue] = useState(message);
     const [comments, setComments] = useState(false);
-    const [totalComments, setTotalComments] = useState(0)
+    const [totalComments, setTotalComments] = useState(0);
+    const [inputValue, setInputValue] = useState(message);
     const previousInputValue = useRef(null);
     const navigate = useNavigate();
 
@@ -90,7 +90,9 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                 return axios.delete(`${api.BASE_URL}/posts/${postId}`, config )
                         .then(response => 
                             Swal.isLoading())
-                        .catch(error => {Swal.showValidationMessage(`Request failed: ${error}`)})
+                        .catch(error => {
+                            console.log(error);
+                            Swal.showValidationMessage(`Request failed: ${error}`)})
             },
             allowOutsideClick: () => !Swal.isLoading()
             }).then((result) => {
@@ -115,7 +117,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                         <Like postId={id} userId={userId}></Like> 
                     </PostLikes>
                     <PostComment setComments={setComments} comments={comments} 
-                    postId={id} userId={userId} token={user?.token} 
+                    postId={id} userId={userId} token={userData?.token} 
                     totalComments={totalComments} />
                     
                     {userId === userData.id ? 
@@ -126,9 +128,7 @@ export default function Post ({ name, image, url, message, metadata, userId, id 
                 </PostAuth>
             
                 <PostInfo>
-                    <UserName onClick={() => {setUser({...user, id:userId, name:name, image: image});
-                        navigate(`/user/${userId}`)}}
-                        >
+                    <UserName onClick={() => navigate(`/user/${userId}`)}>
                         {name}
                     </UserName>
                     {editPost ? 
