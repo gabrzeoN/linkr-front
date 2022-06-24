@@ -29,13 +29,20 @@ async function commentsCounter(postId, token) {
     return promise;
 }
 
+async function getFollowStatus(userToVerify, token) {
+    const auth = createHeaders(token);
+    const promise = await axios.get(`${BASE_URL}/followers/${userToVerify}`, auth);
+
+    return promise;
+}
+
 const api={
     signUp,
     BASE_URL,
     createComment,
     getComments,
     commentsCounter,
-
+    getFollowStatus
 }
 
 export default api; 
