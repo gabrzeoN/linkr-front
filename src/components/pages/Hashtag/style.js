@@ -10,6 +10,7 @@ const Container = styled.main`
 
 const LeftWrapper = styled.div`
     width: 60%;
+    padding-left: 15%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
