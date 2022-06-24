@@ -1,14 +1,13 @@
-//import { useState } from "react";
 import styled from "styled-components";
 import Header from "./Header";
 import Post from "./Post/Post";
 
 export default function PostList ({posts, getPosts, loading}) {
-    console.log("aaaa", posts);
-
-    function showPosts () {   
-        if (posts?.length !== 0) {
-            console.log("passei", posts);
+    function showPosts () {  
+        if(posts[0] === "You don't follow anyone yet"){
+           return  <NoPosts>You don't follow anyone yet. Search for new friends!</NoPosts>
+        } 
+        else if (posts?.length !== 0) {
             return posts?.map((post, i)=> {
                 const { userId, name, image, id , url, metadata, message } = post;
                 
@@ -22,7 +21,7 @@ export default function PostList ({posts, getPosts, loading}) {
             });
         } else {
             return (
-                <NoPosts>There are no posts yet</NoPosts>
+                <NoPosts>No posts found from your friends</NoPosts>
             );
         }
     }

@@ -19,18 +19,14 @@ export default function Timeline() {
     };
 
     function getPosts() {
-        const promise = axios.get(`${api.BASE_URL}/timeline`, config);
+        const promise = axios.get(`${api.BASE_URL}/posts`, config);
         setLoading(true);
         promise.then(response => {
             setLoading(false);
-            console.log("timeline", response.data);
-            const { data } = response;
-            setPosts(data);
-
+            setPosts(response.data);
         })
         promise.catch((error) => {
             console.log(error);
-            //alert('An error occured while trying to fetch the posts, please refresh the page');
         });
     }
 
