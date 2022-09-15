@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# <p align = "center"> Linkr </p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### <p align = "center" style="color:red" > Confira também o [back-end](https://github.com/gabrzeoN/linkr-back) </p>
+##
+<div align = "center" >
+    <img src="./pictures/Linkr-1.png" width="900px" />
+    <img src="./pictures/Linkr-2.png" width="900px" />
+    <img src="./pictures/Linkr-3.png" width="900px" />
+</div>
 
-## Available Scripts
+***
 
-In the project directory, you can run:
+##  :clipboard: Descrição
 
-### `npm start`
+Implementação de uma rede social de compartilhamento de links!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+***
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## :computer:	 Tecnologias e Conceitos 
 
-### `npm test`
+- React
+- Node.js
+- Postgresql
+- Arquitetura em camadas
+- axios
+- styled-components
+***
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🏁 Rodando o back-end
 
-### `npm run build`
+1. Primeiro, configure o [back-end](https://github.com/gabrzeoN/linkr-back)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Faça o clone desse repositório na sua maquina:
+```
+    git clone https://github.com/gabrzeoN/linkr-front.git
+    ou
+    git clone git@github.com:gabrzeoN/linkr-front.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Depois, dentro da pasta, rode o seguinte comando para instalar as dependencias
+```
+    npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Configure o arquivo **.env**  com base no arquivo **.env.example** (configure somente a porta, com a mesma porta do back-end)
 
-### `npm run eject`
+2. Finalizado o processo, é só inicializar o servidor
+```
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## :sparkles: Autores
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| [<img src="https://avatars.githubusercontent.com/geicybeatriz" width=115><br><sub>Geicy Cardoso</sub>](https://github.com/geicybeatriz) |  [<img src="https://avatars.githubusercontent.com/gabrzeoN" width=115><br><sub>Gabriel Cari</sub>](https://github.com/gabrzeoN) |  [<img src="https://avatars.githubusercontent.com/joltzz" width=115><br><sub>Guilherme Jankowiak</sub></sub>](https://github.com/joltzz) |  [<img src="https://avatars.githubusercontent.com/MateusGHmaster" width=115><br><sub>Mateus Oliveira</sub>](https://github.com/MateusGHmaster) 
+| :---: | :---: | :---: | :---: |
